@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pratik Poudel — Data Science Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ─── NAVBAR ─── -->
+  <nav>
+    <a class="nav-logo" href="#">Pratik Poudel</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+
+    <div class="hero-content">
+      <!-- LEFT -->
+      <div>
+        <p class="hero-label">Portfolio — 2025</p>
+        <h1 class="hero-name">Pratik<br><em>Poudel</em></h1>
+        <p class="hero-title">
+          <span class="typing-text" id="typingText"></span><span class="typing-cursor"></span>
+        </p>
+        <p class="hero-desc">
+          Transforming raw data into actionable intelligence. Bridging the gap between complex datasets and clear, business-driven decisions through Python, SQL, and modern data science practices.
+        </p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn-primary">View My Work</a>
+          <a href="#contact" class="btn-outline">Get in Touch</a>
+        </div>
+      </div>
+
+      <!-- RIGHT — STAT CARD -->
+      <div class="hero-visual fade-up" style="animation-delay:0.3s">
+        <div class="hero-card">
+          <div class="stat-row">
+            <div class="stat">
+              <span class="stat-num">3+</span>
+              <span class="stat-label">Core Skills</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">∞</span>
+              <span class="stat-label">Curiosity</span>
+            </div>
+          </div>
+
+          <div style="border-top: 1px solid var(--border); padding-top: 1.5rem; margin-bottom: 1.5rem;">
+            <p style="font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem;">Proficiency</p>
+            <div class="skill-bar-group">
+              <div class="skill-bar-item">
+                <div class="skill-bar-label"><span>Python</span><span>92%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" style="width:92%; background: var(--accent);"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-bar-label"><span>SQL</span><span>88%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" style="width:88%; background: var(--accent2); animation-delay:0.65s"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-bar-label"><span>Data Science</span><span>85%</span></div>
+                <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%; background: var(--accent3); animation-delay:0.8s"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:0.75rem; padding-top: 0.5rem; border-top: 1px solid var(--border);">
+            <div style="width:8px; height:8px; border-radius:50%; background: #4ade80; box-shadow: 0 0 8px #4ade80;"></div>
+            <span style="font-size:0.78rem; color: var(--muted);">Available for opportunities</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ─── ABOUT ─── -->
+  <section id="about">
+    <div class="about-grid">
+      <div>
+        <div class="section-header">
+          <p class="section-label">Who I Am</p>
+          <h2 class="section-title">Turning data into<br><em style="font-family:var(--font-serif); font-style:italic; color:var(--accent)">clarity</em></h2>
+        </div>
+        <div class="about-text fade-up">
+          <p>I'm <span class="about-highlight">Pratik Poudel</span>, a data professional with a deep passion for uncovering the stories hidden within numbers. My journey spans across Python development, database architecture, and applied machine learning.</p>
+          <p>I believe that data science is not just about algorithms — it's about asking the right questions, building reliable pipelines, and communicating findings with precision and purpose.</p>
+          <p>Whether it's designing complex SQL queries, training predictive models, or building automated data workflows, I bring both technical rigour and creative problem-solving to every project.</p>
+        </div>
+      </div>
+
+      <div class="fade-up">
+        <div style="background: var(--surface); border: 1px solid var(--border); padding: 2.5rem; margin-bottom: 1.5rem; position: relative; overflow: hidden;">
+          <div style="position:absolute; top:-20px; right:-20px; width:100px; height:100px; border-radius:50%; background: radial-gradient(circle, rgba(200,169,110,0.1), transparent 70%);"></div>
+          <p class="section-label" style="margin-bottom: 1.5rem;">Quick Info</p>
+          <div class="about-info-list">
+            <div class="about-info-item">
+              <span class="about-info-key">Name</span>
+              <span class="about-info-val">Pratik Poudel</span>
+            </div>
+            <div class="about-info-item">
+              <span class="about-info-key">Location</span>
+              <span class="about-info-val">Nepal 🇳🇵</span>
+            </div>
+            <div class="about-info-item">
+              <span class="about-info-key">Website</span>
+              <span class="about-info-val"><a href="https://pratikpoudel0.com.np" target="_blank">pratikpoudel0.com.np</a></span>
+            </div>
+            <div class="about-info-item">
+              <span class="about-info-key">Email</span>
+              <span class="about-info-val"><a href="mailto:poudelpratik50@gmail.com">poudelpratik50@gmail.com</a></span>
+            </div>
+            <div class="about-info-item">
+              <span class="about-info-key">Status</span>
+              <span class="about-info-val" style="color: #4ade80;">Open to Work</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ─── SKILLS ─── -->
+  <div class="skills-section" id="skills">
+    <div>
+      <div class="section-header">
+        <p class="section-label">Expertise</p>
+        <h2 class="section-title">Core Skills &<br>Technologies</h2>
+        <p class="section-subtitle" style="margin-top:0.75rem;">A focused toolkit built for real-world data challenges — from raw ingestion to insightful reporting.</p>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card fade-up">
+          <p class="skill-card-num">01</p>
+          <div class="skill-card-icon">🐍</div>
+          <h3 class="skill-card-title">Python</h3>
+          <p class="skill-card-desc">Writing clean, efficient Python code for data manipulation, automation, API development, and statistical modelling across diverse domains.</p>
+          <div class="skill-card-tags">
+            <span class="tag">Pandas</span>
+            <span class="tag">NumPy</span>
+            <span class="tag">Matplotlib</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">Jupyter</span>
+          </div>
+        </div>
+
+        <div class="skill-card fade-up" style="transition-delay:0.1s">
+          <p class="skill-card-num">02</p>
+          <div class="skill-card-icon">🗄️</div>
+          <h3 class="skill-card-title">SQL</h3>
+          <p class="skill-card-desc">Mastery of relational databases — designing schemas, crafting complex queries, optimizing performance, and building data pipelines at scale.</p>
+          <div class="skill-card-tags">
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">SQLite</span>
+            <span class="tag">Window Fns</span>
+            <span class="tag">Indexing</span>
+          </div>
+        </div>
+
+        <div class="skill-card fade-up" style="transition-delay:0.2s">
+          <p class="skill-card-num">03</p>
+          <div class="skill-card-icon">📊</div>
+          <h3 class="skill-card-title">Data Science</h3>
+          <p class="skill-card-desc">End-to-end data science workflows: EDA, feature engineering, model training, evaluation, and deployment of predictive and analytical solutions.</p>
+          <div class="skill-card-tags">
+            <span class="tag">Scikit-learn</span>
+            <span class="tag">ML Models</span>
+            <span class="tag">EDA</span>
+            <span class="tag">Seaborn</span>
+            <span class="tag">Statsmodels</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ─── PROJECTS ─── -->
+  <section id="projects">
+    <div class="section-header">
+      <p class="section-label">Work</p>
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-subtitle" style="margin-top:0.75rem;">A selection of data-driven solutions built to solve real problems with precision and clarity.</p>
+    </div>
+
+    <div class="projects-grid">
+      <div class="project-card fade-up">
+        <p class="project-num">01 / Project</p>
+        <h3 class="project-title">Sales Analytics Dashboard</h3>
+        <p class="project-desc">Built an end-to-end analytics pipeline ingesting raw sales CSVs, transforming them with Python and SQL, and surfacing interactive KPI visualisations for business stakeholders.</p>
+        <div class="project-tech">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">SQL</span>
+          <span class="tech-badge">Pandas</span>
+          <span class="tech-badge">Matplotlib</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up" style="transition-delay:0.1s">
+        <p class="project-num">02 / Project</p>
+        <h3 class="project-title">Customer Churn Predictor</h3>
+        <p class="project-desc">Developed a machine learning model to predict customer churn with 87% accuracy. Used feature engineering, cross-validation, and a gradient boosting classifier to minimise false negatives.</p>
+        <div class="project-tech">
+          <span class="tech-badge">Scikit-learn</span>
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">XGBoost</span>
+          <span class="tech-badge">SHAP</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up" style="transition-delay:0.15s">
+        <p class="project-num">03 / Project</p>
+        <h3 class="project-title">Database Optimisation Engine</h3>
+        <p class="project-desc">Audited and re-architected a PostgreSQL schema handling 10M+ records, reducing query latency by 65% through strategic indexing, query rewrites, and materialised views.</p>
+        <div class="project-tech">
+          <span class="tech-badge">PostgreSQL</span>
+          <span class="tech-badge">SQL</span>
+          <span class="tech-badge">Query Plans</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up" style="transition-delay:0.2s">
+        <p class="project-num">04 / Project</p>
+        <h3 class="project-title">Market Trend Analyser</h3>
+        <p class="project-desc">Automated collection and analysis of market data using Python scrapers, statistical trend detection, and time-series forecasting with ARIMA and Prophet models.</p>
+        <div class="project-tech">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">Prophet</span>
+          <span class="tech-badge">Time Series</span>
+          <span class="tech-badge">NumPy</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ─── CONTACT ─── -->
+  <section id="contact">
+    <div class="contact-wrap">
+      <div>
+        <div class="section-header">
+          <p class="section-label">Contact</p>
+          <h2 class="section-title">Let's Build<br><em style="font-style:italic;color:var(--accent);font-family:var(--font-serif)">Something</em></h2>
+          <p class="section-subtitle" style="margin-top:0.75rem;">Have a project, opportunity, or just want to talk data? My inbox is always open.</p>
+        </div>
+        <div class="contact-info-list fade-up">
+          <div class="contact-info-item">
+            <div class="contact-icon">✉</div>
+            <div>
+              <p class="contact-info-label">Email</p>
+              <p class="contact-info-val"><a href="mailto:poudelpratik50@gmail.com">poudelpratik50@gmail.com</a></p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon">🌐</div>
+            <div>
+              <p class="contact-info-label">Website</p>
+              <p class="contact-info-val"><a href="https://pratikpoudel0.com.np" target="_blank" style="color: var(--accent);">pratikpoudel0.com.np</a></p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <p class="contact-info-label">Location</p>
+              <p class="contact-info-val">Nepal — Open to Remote</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <div class="contact-form-wrap fade-up">
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input type="text" class="form-input" placeholder="John Doe">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-input" placeholder="john@example.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" rows="5" placeholder="Tell me about your project..."></textarea>
+        </div>
+        <button class="btn-primary" style="clip-path:none; width:100%; text-align:center; cursor:pointer;" onclick="alert('Message sent! Pratik will get back to you shortly.')">Send Message →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <p>© 2025 Pratik Poudel — <span style="color: var(--accent);">pratikpoudel0.com.np</span></p>
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="mailto:poudelpratik50@gmail.com">Email</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    // ─── CURSOR
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+    function animRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animRing); }
+    animRing();
+    document.querySelectorAll('a, button, .skill-card, .project-card').forEach(el => {
+      el.addEventListener('mouseenter', () => { ring.style.transform = 'translate(-50%,-50%) scale(1.8)'; ring.style.borderColor = 'rgba(200,169,110,0.7)'; });
+      el.addEventListener('mouseleave', () => { ring.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.borderColor = 'rgba(200,169,110,0.4)'; });
+    });
+
+    // ─── TYPING EFFECT
+    const words = ['Data Scientist', 'Python Developer', 'SQL Engineer', 'ML Enthusiast'];
+    let wi = 0, ci = 0, del = false;
+    const el = document.getElementById('typingText');
+    function type() {
+      const w = words[wi];
+      if (!del) { ci++; el.textContent = w.slice(0, ci); if (ci === w.length) { del = true; setTimeout(type, 1800); return; } }
+      else { ci--; el.textContent = w.slice(0, ci); if (ci === 0) { del = false; wi = (wi + 1) % words.length; } }
+      setTimeout(type, del ? 55 : 90);
+    }
+    setTimeout(type, 800);
+
+    // ─── SCROLL FADE
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
