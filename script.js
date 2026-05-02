@@ -41,7 +41,37 @@ document.addEventListener('DOMContentLoaded', () => {
     cursor.style.transform = 'translate(-50%, -50%) scale(1)';
   });
 
-  // ─── SCROLL NAVIGATION
+   // ─── SIDEBAR TOGGLE
+   const sidebar = document.getElementById('book-sidebar');
+   const backdrop = document.getElementById('sidebar-backdrop');
+   const toggleBtn = document.querySelector('.sidebar-toggle');
+   const closeBtn = document.querySelector('.sidebar-close');
+
+   if (toggleBtn && sidebar && backdrop) {
+     const openSidebar = () => {
+       sidebar.classList.add('open');
+       backdrop.classList.add('visible');
+       document.body.style.overflow = 'hidden';
+     };
+     const closeSidebar = () => {
+       sidebar.classList.remove('open');
+       backdrop.classList.remove('visible');
+       document.body.style.overflow = '';
+     };
+
+     toggleBtn.addEventListener('click', openSidebar);
+     if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+     backdrop.addEventListener('click', closeSidebar);
+
+     // Close sidebar when a chapter is selected
+     document.querySelectorAll('.sidebar-toc .toc-btn').forEach(btn => {
+       btn.addEventListener('click', () => {
+         closeSidebar();
+       });
+     });
+   }
+
+   // ─── SCROLL NAVIGATION
   const scrollToId = (id) => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -49,16 +79,21 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const showChapter = (id) => {
-    document.querySelectorAll('.book-section').forEach(section => {
-      section.classList.add('hidden');
-      section.classList.remove('active');
-    });
     const target = document.getElementById(id);
-    if (target) {
+    if (target && target.classList.contains('book-section')) {
+      document.querySelectorAll('.book-section').forEach(section => {
+        section.classList.add('hidden');
+        section.classList.remove('active');
+      });
       target.classList.remove('hidden');
       target.classList.add('active');
-      scrollToId(id);
     }
+    scrollToId(id);
+
+    // Update sidebar active state
+    document.querySelectorAll('.sidebar-toc .toc-btn').forEach(btn => btn.classList.remove('active'));
+    const activeBtn = document.querySelector(`.sidebar-toc .toc-btn[data-target="${id}"]`);
+    if (activeBtn) activeBtn.classList.add('active');
   };
 
   document.querySelectorAll('[data-scroll]').forEach((btn) => {
