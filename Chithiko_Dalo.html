@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chithki Ko Daalo — Puspa Poudel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/reader.css">
+  <script>
+    (() => {
+      const v = '20260502-1';
+      const isHttp = window.location.protocol === 'http:' || window.location.protocol === 'https:';
+      if (isHttp) {
+        const url = new URL(window.location.href);
+        if (!url.searchParams.get('v')) {
+          url.searchParams.set('v', v);
+          window.location.replace(url.toString());
+          return;
+        }
+        const cssLink = document.querySelector('link[rel="stylesheet"][href="assets/css/style.css"]');
+        if (cssLink) cssLink.href = `assets/css/style.css?v=${encodeURIComponent(v)}`;
+      }
+    })();
+  </script>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Puspa Poudel</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#books">Books</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="book-reader">
+    <a href="index.html" class="back-to-index">← Back to Home</a>
+
+    <div class="book-reader-header">
+      <div class="book-reader-subtitle">Full Novel</div>
+      <h1 class="book-reader-title">चिठ्ठीको डालो</h1>
+    </div>
+
+    <div class="pdf-container">
+      <iframe src="पुष्प पौडेल १.pdf" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <div class="reader-footer">
+      पुस्तकको पूर्ण पाठ सङ्ग्रह।<br>
+      <a href="पुष्प पौडेल १.pdf" class="download-link" download>Download PDF</a>
+      <br>
+      © 2025 Puspa Poudel
+    </div>
+  </div>
+
+</body>
+</html>
+
