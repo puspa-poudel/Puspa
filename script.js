@@ -1,3 +1,9 @@
+// Clean URL redirect
+if (window.location.pathname.endsWith('/index.html')) {
+  const cleanPath = window.location.pathname.replace('/index.html', '/');
+  window.location.replace(window.location.origin + cleanPath + window.location.search);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // ─── CURSOR
   const cursor = document.getElementById('cursor');
@@ -48,16 +54,16 @@ document.addEventListener('DOMContentLoaded', () => {
    const closeBtn = document.querySelector('.sidebar-close');
 
    if (toggleBtn && sidebar && backdrop) {
-     const openSidebar = () => {
-       sidebar.classList.add('open');
-       backdrop.classList.add('visible');
-       document.body.style.overflow = 'hidden';
-     };
-     const closeSidebar = () => {
-       sidebar.classList.remove('open');
-       backdrop.classList.remove('visible');
-       document.body.style.overflow = '';
-     };
+      const openSidebar = () => {
+        sidebar.classList.add('open');
+        backdrop.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      };
+      const closeSidebar = () => {
+        sidebar.classList.remove('open');
+        backdrop.classList.remove('active');
+        document.body.style.overflow = '';
+      };
 
      toggleBtn.addEventListener('click', openSidebar);
      if (closeBtn) closeBtn.addEventListener('click', closeSidebar);

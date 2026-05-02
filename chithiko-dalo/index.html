@@ -9,6 +9,12 @@
   <link rel="stylesheet" href="../styles.css">
   <script>
     (() => {
+      // Clean URL redirect
+      if (window.location.pathname.endsWith('/index.html')) {
+        const cleanPath = window.location.pathname.replace('/index.html', '/');
+        window.location.replace(window.location.origin + cleanPath + window.location.search);
+      }
+
       const v = '20260502-1';
       const isHttp = window.location.protocol === 'http:' || window.location.protocol === 'https:';
       if (isHttp) {
@@ -18,8 +24,9 @@
           window.location.replace(url.toString());
           return;
         }
-        const cssLink = document.querySelector('link[rel="stylesheet"][href="../styles.css"]');
-        if (cssLink) cssLink.href = `../styles.css?v=${encodeURIComponent(v)}`;
+
+        const cssLink = document.querySelector('link[rel="stylesheet"][href="styles.css"]');
+        if (cssLink) cssLink.href = `styles.css?v=${encodeURIComponent(v)}`;
       }
     })();
   </script>
@@ -27,16 +34,16 @@
 <body>
 
   <nav>
-    <a href="../index.html" class="nav-logo">Puspa Poudel</a>
+    <a href="../" class="nav-logo">Puspa Poudel</a>
     <ul class="nav-links">
-      <li><a href="../index.html#about">About</a></li>
-      <li><a href="../index.html#books">Books</a></li>
-      <li><a href="../index.html#contact">Contact</a></li>
+      <li><a href="../#about">About</a></li>
+      <li><a href="../#books">Books</a></li>
+      <li><a href="../#contact">Contact</a></li>
     </ul>
   </nav>
 
   <div class="book-reader">
-    <a href="../index.html" class="back-to-index">← Back to Home</a>
+    <a href="../" class="back-to-index">← Back to Home</a>
 
     <div class="book-reader-header">
       <div class="book-reader-subtitle">Full Novel</div>

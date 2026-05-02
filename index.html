@@ -9,6 +9,12 @@
   <link rel="stylesheet" href="styles.css">
   <script>
     (() => {
+      // Clean URL redirect
+      if (window.location.pathname.endsWith('/index.html')) {
+        const cleanPath = window.location.pathname.replace('/index.html', '/');
+        window.location.replace(window.location.origin + cleanPath + window.location.search);
+      }
+
       const v = '20260502-1';
       const isHttp = window.location.protocol === 'http:' || window.location.protocol === 'https:';
 
@@ -102,7 +108,7 @@
 
       <div class="books-grid">
 
-        <a class="book-card" href="chithiko-dalo/index.html" aria-label="Open चिठ्ठीको दालो">
+        <a class="book-card" href="chithiko-dalo/" aria-label="Open चिठ्ठीको दालो">
           <div class="book-cover">
             <img class="book-cover-img" src="Chitthiko%20Daalo.png?v=20260502-1" alt="चिठ्ठीको दालो — पुस्तक आवरण" />
             <span class="book-genre-badge">प्रकाशित</span>
@@ -114,7 +120,7 @@
           </div>
         </a>
 
-        <a class="book-card" href="jiwan_jyoti/index.html" aria-label="Open जीवनज्योति">
+        <a class="book-card" href="jiwan_jyoti/" aria-label="Open जीवनज्योति">
           <div class="book-cover">
             <img class="book-cover-img" src="jiwanjyoti.png?v=20260502-1" alt="जीवनज्योति — पुस्तक आवरण" />
             <span class="book-genre-badge">प्रकाशित</span>
@@ -126,7 +132,7 @@
           </div>
         </a>
 
-        <a class="book-card" href="dukheko-man/index.html" aria-label="Open दुखेको मन">
+        <a class="book-card" href="dukheko-man/" aria-label="Open दुखेको मन">
           <div class="book-cover">
             <img class="book-cover-img" src="Dukheko%20man.png?v=20260502-1" alt="दुखेको मन — पुस्तक आवरण" />
             <span class="book-genre-badge">प्रकाशित</span>

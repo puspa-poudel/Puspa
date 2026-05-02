@@ -596,10 +596,7 @@ body {
   background: linear-gradient(to left, transparent, var(--gold-muted));
 }
 
-.chapter-ornament[aria-hidden="true"]::before,
-.chapter-ornament[aria-hidden="true"]::after {
-  /* ornament diamonds */
-}
+
 
 /* Adding ornament diamond via pseudo-element trick */
 .chapter-ornament {

@@ -8,6 +8,12 @@
   <link rel="stylesheet" href="styles.css">
   <script src="../script.js" defer></script>
   <script>
+    // Clean URL redirect
+    if (window.location.pathname.endsWith('/index.html')) {
+      const cleanPath = window.location.pathname.replace('/index.html', '/');
+      window.location.replace(window.location.origin + cleanPath + window.location.search);
+    }
+
     document.addEventListener('scroll', () => {
       const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
       document.body.style.setProperty('--scroll-progress', (p * 100) + '%');
@@ -26,7 +32,7 @@
 
    <header class="topbar" role="banner">
      <div class="topbar-inner">
-       <a href="../index.html" class="author-link" aria-label="Puspa Poudel homepage" style="text-decoration: none;">
+       <a href="../" class="author-link" aria-label="Puspa Poudel homepage" style="text-decoration: none;">
          <div class="author-title">पुष्प पौडेल </div>
        </a>
        <div class="book-title">दुखेको मन</div>
