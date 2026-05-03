@@ -641,6 +641,7 @@ body {
   margin-bottom: 1.8em;
   line-height: 2.1;
   font-size: 1.4rem;
+  white-space: pre-line;
 }
 
 .book-content p:first-of-type::first-letter {
