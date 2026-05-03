@@ -753,9 +753,9 @@ body::after {
 }
 
 
-/* ── Introduction Section ────────────────────────────────── */
-#introduction .page-inner::before {
-  content: 'परिचय';
+/* ── Chapter 1 Section ────────────────────────────────── */
+#chapter-1 .page-inner::before {
+  content: 'भाग १';
   display: block;
   font-family: var(--font-display);
   font-size: 6rem;
