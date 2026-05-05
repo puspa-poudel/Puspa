@@ -385,8 +385,19 @@ body {
   text-align: center;
 }
 
-.cover-image {
+.cover-image-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  display: block;
+  margin: 0 auto;
   max-width: 380px;
+  width: 100%;
+}
+
+.cover-image {
+  max-width: 100%;
   width: 100%;
   height: auto;
   box-shadow: var(--shadow-lg), 0 0 0 1px rgba(184,151,42,0.15);
@@ -394,7 +405,6 @@ body {
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
               box-shadow 0.5s ease;
   display: block;
-  margin: 0 auto;
 }
 
 .cover-image:hover {
@@ -853,7 +863,7 @@ a:focus-visible {
     width: 290px;
   }
 
-  .cover-image {
+  .cover-image-btn {
     max-width: 280px;
   }
 }
