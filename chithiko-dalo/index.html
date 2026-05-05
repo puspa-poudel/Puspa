@@ -1,67 +1,1356 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ne">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chithki Ko Daalo — Puspa Poudel</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>चिठ्ठीको डालो — Digital Book</title>
   <link rel="icon" type="image/png" href="../photo.png">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;300;400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="../script.js?v=1" defer></script>
   <script>
-    (() => {
-      // Clean URL redirect
-      if (window.location.pathname.endsWith('/index.html')) {
-        const cleanPath = window.location.pathname.replace('/index.html', '/');
-        window.location.replace(window.location.origin + cleanPath + window.location.search);
-      }
+    
+    document.addEventListener('scroll', () => {
+      const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+      document.body.style.setProperty('--scroll-progress', (p * 100) + '%');
+    });
 
-      const v = '20260502-1';
-      const isHttp = window.location.protocol === 'http:' || window.location.protocol === 'https:';
-      if (isHttp) {
-        const url = new URL(window.location.href);
-        if (!url.searchParams.get('v')) {
-          url.searchParams.set('v', v);
-          window.location.replace(url.toString());
-          return;
-        }
-
-        const cssLink = document.querySelector('link[rel="stylesheet"][href="styles.css"]');
-        if (cssLink) cssLink.href = `styles.css?v=${encodeURIComponent(v)}`;
-      }
-    })();
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY > 10;
+      document.body.classList.toggle('scrolled', scrolled);
+    });
   </script>
 </head>
-<body>
+<body class="page-chithiko-daalo">
+  <!-- Custom Cursor Elements -->
+  <div id="cursor"></div>
+  <div id="cursorRing"></div>
 
-  <nav>
-    <a href="../" class="nav-logo">Puspa Poudel</a>
-    <ul class="nav-links">
-      <li><a href="../#about">About</a></li>
-      <li><a href="../#books">Books</a></li>
-      <li><a href="../#contact">Contact</a></li>
-    </ul>
-  </nav>
+   <header class="topbar" role="banner">
+     <div class="topbar-inner">
+       <a href="../" class="author-link" aria-label="Puspa Poudel homepage" style="text-decoration: none;">
+         <div class="author-title">पुष्प पौडेल </div>
+       </a>
+       <div class="book-title">चिठ्ठीको डालो</div>
+       <div class="topbar-actions">
+         <button class="btn animated-btn" type="button" data-scroll="toc">अध्याय</button>
+         <button class="btn animated-btn" type="button" data-scroll="top">माथि</button>
+       </div>
+     </div>
+   </header>
 
-  <div class="book-reader">
-    <a href="../" class="back-to-index">← Back to Home</a>
+  <main class="container" id="top">
+    <section class="page cover-page" aria-label="Cover page">
+      <div class="page-inner titlepage">
+        <button data-target="toc" class="cover-image-btn">
+          <img src="../Chitthiko%20Daalo.png" alt="चिठ्ठीको डालो Cover" class="cover-image">
+        </button>
+      </div>
+    </section>
 
-    <div class="book-reader-header">
-      <div class="book-reader-subtitle">Full Novel</div>
-      <h1 class="book-reader-title">चिठ्ठीको डालो</h1>
-    </div>
+    <section class="page" id="toc" aria-label="Table of contents">
+      <div class="page-inner">
+        <h2 class="toc-title">अध्याय</h2>
 
-    <div class="pdf-container">
-      <iframe src="../पुष्प पौडेल १.pdf" frameborder="0" allowfullscreen></iframe>
-    </div>
+        <nav aria-label="Contents navigation">
+          <ol class="toc">
 
-    <div class="reader-footer">
-      पुस्तकको पूर्ण पाठ सङ्ग्रह।<br>
-      <a href="../पुष्प पौडेल १.pdf" class="download-link" download>Download PDF</a>
-      <br>
-      © 2025 Puspa Poudel
-    </div>
-  </div>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+              <button class="toc-btn" type="button" data-target="introduction">
+                परिचय
+                <small>मेरो भन्नु</small>
+              </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+              <button class="toc-btn" type="button" data-target="chapter-1">
+                पत्र १
+                <small>पहिलो पत्र</small>
+              </button>
+            </li>
+<li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+              <button class="toc-btn" type="button" data-target="chapter-2">
+                पत्र २
+                <small>दोस्रो पत्र</small>
+              </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+              <button class="toc-btn" type="button" data-target="chapter-3">
+                पत्र ३
+                <small>तेस्रो पत्र</small>
+              </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+              <button class="toc-btn" type="button" data-target="chapter-4">
+                पत्र ४
+                <small>चौथो पत्र</small>
+              </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-5">
+                 पत्र ५
+                 <small>पाँचौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-6">
+                 पत्र ६
+                 <small>छैठौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-7">
+                 पत्र ७
+                 <small>सातौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-8">
+                 पत्र ८
+                 <small>आठौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-9">
+                 पत्र ९
+                 <small>नवौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-10">
+                 पत्र १०
+                 <small>दशौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-11">
+                 पत्र ११
+                 <small>एघारौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-12">
+                 पत्र १२
+                 <small>बाह्रौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-13">
+                 पत्र १३
+                 <small>तेह्रौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-14">
+                 पत्र १४
+                 <small>चौधौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-15">
+                 पत्र १५
+                 <small>पन्ध्रौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-16">
+                 पत्र १६
+                 <small>सोह्रौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-17">
+                 पत्र १७
+                 <small>सत्रौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-18">
+                 पत्र १८
+                 <small>अठारौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-19">
+                 पत्र १९
+                 <small>उन्नाइसौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-20">
+                 पत्र २०
+                 <small>बीसौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-21">
+                 पत्र २१
+                 <small>एक्काइसौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-22">
+                 पत्र २२
+                 <small>बाइसौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-23">
+                 पत्र २३
+                 <small>तेइसौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-24">
+                 पत्र २४
+                 <small>चौबीसौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-25">
+                 पत्र २५
+                 <small>पच्चीसौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-26">
+                 पत्र २६
+                 <small>छब्बीसौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-27">
+                 पत्र २७
+                 <small>सत्ताइसौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-28">
+                 पत्र २८
+                 <small>अठ्ठाइसौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-29">
+                 पत्र २९
+                 <small>उनन्तीसौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-30">
+                 पत्र ३०
+                 <small>तीसौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-31">
+                 पत्र ३१
+                 <small>एकतीसौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-32">
+                 पत्र ३२
+                 <small>बत्तीसौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-33">
+                 पत्र ३३
+                 <small>तेत्तीसौं पत्र</small>
+               </button>
+            </li>
 
+</ol>
+        </nav>
+      </div>
+    </section>
+
+    <section class="page" id="toc" aria-label="Table of contents">
+      <div class="page-inner">
+        <h2 class="toc-title">अध्याय</h2>
+
+        <nav aria-label="Contents navigation">
+          <ol class="toc">
+
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+              <button class="toc-btn" type="button" data-target="introduction">
+                परिचय
+                <small>मेरो भन्नु</small>
+              </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+              <button class="toc-btn" type="button" data-target="chapter-1">
+                पत्र १ 
+                <small>पहिलो पत्र</small>
+              </button>
+            </li>
+<li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+              <button class="toc-btn" type="button" data-target="chapter-2">
+                पत्र २
+                <small>दोस्रो पत्र</small>
+              </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+              <button class="toc-btn" type="button" data-target="chapter-3">
+                पत्र ३
+                <small>तेस्रो पत्र</small>
+              </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+              <button class="toc-btn" type="button" data-target="chapter-4">
+                पत्र ४
+                <small>चौथो पत्र</small>
+              </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-5">
+                 पत्र ५
+                 <small>पाँचौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-6">
+                 पत्र ६
+                 <small>छैठौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-7">
+                 पत्र ७
+                 <small>सातौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-8">
+                 पत्र ८
+                 <small>आठौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-9">
+                 पत्र ९
+                 <small>नवौं पत्र</small>
+               </button>
+            </li>
+            <li class="toc-item">
+              <span class="dot" aria-hidden="true"></span>
+               <button class="toc-btn" type="button" data-target="chapter-10">
+                 पत्र १०
+                 <small>दशौं पत्र</small>
+               </button>
+            </li>
+            
+</ol>
+        </nav>
+      </div>
+    </section>
+
+     <section class="page book-section active" id="introduction" aria-label="Introduction">
+       <article class="page-inner book-content">
+         <p class="chapter-kicker">परिचय</p>
+           <h2>मेरो भन्नु</h2>
+           <div class="chapter-ornament" aria-hidden="true"></div>
+           <p>२०५५ सालतिर सिन्धुपाल्चोक बस्दा गाँउले परिबेशमा एउटा सानो कथा लेखेको थिएँ
+धेरै समयपछि घरमा एक दिन मेरि श्रीमति कल्पनाले कुचो लगाउँदा त्यो कथा भेटिछन्
+र मलाई दिईन् । मैले त्यसमा दुईचार हरफ थप्ने जमर्को गरेँ । फलस्वरुप यो एउटा
+सानो कथा तयार भयो । एउटा गरिब परिवारको काल्पनिक बृत्तकथालाई यहाँहरुबिच 
+प्रस्तुत गर्ने कोशिस् गरेको छु । यो मेरो प्रथम प्रयास हो यसमा कयौँ त्रुटिहरु होलान्
+त्यसलाई सच्याएर पढ्न अनुरोध गर्दछु । यो कथा भन्दा ठुलो र उपन्यास भन्दा सानो
+भएकोले मैले यसलाई उपकथाको नाम दिएको छु । पठित बिद्धानहरुको बिचमा नेपाली
+साहित्यमा यसले छुट्टै शब्द ल्यायो भनेर गिल्ला नगरि यसभित्रको मर्म र भावलाई पढेर
+बुझिदिन अनुरोध गर्दछु । बढि पात्रहरुलाई उभ्याएर पाठकको मष्तिस्कलाई भ्रमित नगरि एउटा सामाजिक परिवेश भित्र रहेको एउटा गरिब परिवारको कारुणिक अवस्थालाई चित्रण गर्न खोजेको छु । यहाँहरुको सुझाव र प्रतिक्रियाको आशा राख्दै अन्त्यमा कम्प्युटर सहयोगि कार्कीडाँडा निबसी दिनेश बि.क. लाई धन्यवाद दिन चाहान्छु । 
+
+नमस्कार
+</p>
+           <div class="page-number">Page 1</div>
+         <div class="next-chapter-container">
+           <button class="btn" type="button" data-scroll="toc">← Back to TOC</button>
+           <button class="next-chapter-btn" type="button" data-target="chapter-1">Next →</button>
+         </div>
+         <div class="page-jumper">
+           <form onsubmit="goToPage(event)">
+             <label for="page-input">Go to Page:</label>
+             <input type="number" id="page-input" min="1" max="34" />
+             <button type="submit">Go</button>
+           </form>
+         </div>
+       </article>
+     </section>
+
+     <section class="page book-section hidden" id="chapter-1" aria-label="Chapter 1">
+      <article class="page-inner book-content">
+        <p class="chapter-kicker">पत्र १ </p>
+        <h2>पहिलो पत्र</h2>
+        <div class="chapter-ornament" aria-hidden="true"></div>
+        <p>रनेले दुई चार सर्को के खाएथ्यो लालुले कुराको प्रसङग अगाडि बढायो । दाई ! तिमी अहिले बलिया छौ र पाखुरी खियाएर एक गााँस खान पुगेको छ । तिम्रो बुढेस कालको साहारा छैन । सेती भाउजु बाट पनि सन्तान भएन । त्यसैले अर्को आहाल गर्नुपर्छ । रनेले उत्तर दियो के गर्छस लालु यो न मेरो दोष हो वा न सेतीको । कहिँ गएर उपचार गर्दा पनि भएन के गरौँ ? लालुले फेरी थप्यो । बुढेस कालमा वरको सिन्को पर सार्न नसक्दा के हालत हुन्छ ? त्यसैले बेलैमा सोच्नु पर्छ भनेर मैले तिमीलाई कति पल्ट भने ? रनेले भन्यो "म सबै सँग ठगिएको मान्छे, आज भाग्याले पनि ठग्यो के गर्छस् भाई ? जे आइपर्छ त्यो सहनै पर्छ ।" ठीकै छ मैले तिमीलाई बेलैमा सम्झाएको हँु, तिम्रो जो बिचार भन्दै लालु चरोट तान्दै आफ्नो  बाटो लाग्यो । 
+
+	आज चालिस वसन्त पार भै सके । सेती पनि खिन्न छ । नाममा मात्र होइन, शरीरमा पनि उ गोरी छ ।आफुले कसलाई कस्तो सम्मान गर्नुपर्छ, सो उसलाई सम्झाई रहनु पर्दैन । ऊ अत्यन्त सुशील नारी छे । पुष्ट जिऊ र ठुलो ललाट माथि टिका, खद्धरको धोति माथि चोलो लगाउँदा ऊ अप्सरा जस्ती देखिन्छे । आज सम्म ती दुईको बीचमा नराम्रो बचन भएको छैन । दुवै मिलेर गाउँको उकालो, ओरालो, मेलापात, गाउँ बेँशी गर्छन् । सबै कुरमा उनीहरु सन्तोषै छन् तर एउटा मात्र पनि सन्तान नहँुदा उनीहरु दुखी छन् । एक आपसमा पिरोलीन्छन् अनि दुखेसो पोख्छन् त कहिले अंकमाल गरेर रुन्छन् । आफ्नो कर्मलाई धिक्र्काछन अनि सराप्छन् ।
+
+शिशिरको जाडो छ । सुर्यको मधुरो किरण आँगनमा छरियो । रने चोयाको डोको बुन्दै घाम तापिरहेको थियो । आज रनेले सेतीलाई इशारा गर्दै मसिनो स्वारमा भन्यो, देखिस् त सेती आज हामीलाई अपुत्रो भन्नेको मेख मर्ने भयो । सेतीको मुहारमा खुशीको किरण सल्वलायो, अनि भनी, सबै कुरा भगवानको खटन् उनले जे दिन्छन् त्यहि हात थाप्नु पर्छ । यति भन्दै सेती घरको धन्दा तिर लाग्छे । रने पनि चोया काड्दै डोको बुन्ने काममा आफ्नो ध्यान केन्द्रित गर्छ । आजकल रनेलाई रातमा नीद छैन । नयाँ उत्साहा छ, उमंग छ ।
+</p>
+        <div class="page-number">Page 2</div>
+        <div class="next-chapter-container">
+          <button class="prev-chapter-btn" type="button" data-target="introduction">← Previous</button>
+          <button class="next-chapter-btn" type="button" data-target="chapter-2">Next →</button>
+        </div>
+        <div class="page-jumper">
+          <form onsubmit="goToPage(event)">
+            <label for="page-input">Go to Page:</label>
+            <input type="number" id="page-input" min="1" max="34" />
+            <button type="submit">Go</button>
+          </form>
+        </div>
+      </article>
+    </section>
+
+    <section class="page book-section hidden" id="chapter-2" aria-label="Chapter 2">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र २  </p>
+       <h2>दोस्रो पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>
+समय बित्दै गयो सेतीको शरीर पुष्ट हुँदै आयो । रने सेतीलाई घरको हर काममा सघाउँछ । पानी, पँधेरो, घाँस, पात र गहृौ भरी बोक्न ऊ सेतीलाई दिदैन । रने र सेती अब आउने परिवारको नयाँ सदस्यको प्रतिक्षमा छन् । 
+
+सोमबारे औँसीको दिन, सेती नुहाउन पँधेरा तिर जान्छे । रामेकी स्वास्नी उजेली र अन्य छिमेकीको नुहाउने घँुइचो छ । उजेलीले सेतीलाई गिज्याउँदै भनी, अब त हामी सँग के बोल्नु पर्‍यो सेतीको चेहरा लाजले लाल भएर आयो । उसले जवाफ दिई नजिस्काउनु उजेली दिदी,उजेलीले भनी गह्रौ भारी नबोक फेरि बच्चा खेर जाला यस्तो बेलामा आफ्नो शरीरको खुब ख्याल राख्नु पर्छ । अनि वेला-वेलामा डाक्टर सँग जाँच गराउनु पर्छ ।
+
+	साच्चै आजकल रनेलाई नीद छैन भोलिको कामको चिन्तन उ आज राती देखि सोच्न थाल्छ, वस्तुको नाउमा एक गोरु, एक कालि भैँसी र एउटा सिँगारी बाख्री छ । वस्तु भाउको टहल देखि मेलापात सारा काम काजको बोझ रनेले लिएको छ । सेती घर धन्दा र खाना, चुलो, चौका वस्तु भाऊलाई कँुडो, पानी अनि एक दुई मुठा घाँस थप्दैमा दिन जान्छ । रने बेलुका सम्म आगो फुक्छ । कुँडो पकाउँछ, रामायणका श्लोक गुनगुनाउँछ, सुर्ती सालको पातमा बेरेर सल्काउँछ, अनि भोलि पल्टको कामको मेसो तय गर्छ । भोलि त विहानै मिर्मिरेमा उठ्छु , तारे भिरमा गएर घाँस ल्याउँछु , खाना खान्छु , घरको ताने तुने काम सेतीले गरिहाल्छे , रिठ्ठेको मेलामा जान्छु । यो साल यो कालि भैँसीलाई टन्न खुवाएर ब्याए साहुको डोको बुझाएर वाली जाने पाडी ल्याउन पाए अर्को वर्ष त ब्याइहाल्छ । यस्ता तर्कको सुन्दर कल्पना रने सोच्दा सोच्दै भुसुक्क निदाउँछ ।
+
+भोलिपल्ट विहानी सँगै मिर्मिरेमा धोविनीले गीत गाँउछे, अनि त्यो सुसेली सँगै रने ब्यँुझन्छ, र उसका नित्य कर्महरु शुरु हुन्छन् । कम्मरमा नाम्लो कस्छ, अनि तारे भिरतिर ओरालो लाग्छ, ज्यानको बाजि राखेर वुटा - वुटामा समाउँदै घाँसको भारी पु¥याउँछ । बडेमानको टौवा जत्रो भारी बोकेर खुइया सुस्केरा हाल्दै ऊ घर तिर लाग्छ । दङ्ग भारी फालेर टोपिले पसिना पुच्छ । अनि सेतीले सोध्छे ? आज कहाँबाट ल्याउनु भो यो घाँस साहै्र राम्रो रहेछ । कहाँबाट हुनु नी उही तारे भिर बाट । साह्रै भिरमा नजानु होस् है फेरि पल्लाघरे माइलाको चाल होला । आज त जसो तसो घाँस पाइयो भोलि कहाँ बाट ल्याउने हो थाहा छैन । पल्ला घरे माइलको घाँस काट्न जाँदा त्यही भिरबाट लडेर मृत्यु भएको थियो । 
+
+</p>
+       <div class="page-number">Page 3</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-1">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-3">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-3" aria-label="Chapter 3">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र ३</p>
+       <h2>तेस्रो पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>विचरा रने कहिले घाँस नपाएर दिन भर भौतारीन्छ, दिन भरको दुःख वस्तु भाउतिर टन्न अघाए पछि उसलाई सन्तोष हुन्छ । भारी बिसाए पछि एक मुठा दह्रो घाँस वस्तु भाउतिर लिएर जान्छ । ऊ घर आउने बित्तिकै वस्तु भाउहरु ऊ तिर हेरेर आई र म्या गरेर मुन्टो हल्लाउँदै घाँस माग्न थाल्दछन् । घाँस लिएर मुठा फुकाउँदै उ ल खाओ भन्दै भैसी र गोरुलाई घाँस दिन्छ । एक मुठी घाँस बाख्रा तिर फुत्त मिल्काउँछ । 
+
+	रामे दमै र उसकी श्रीमती एक साथ रनेको घर पछाडी बाट आफ्नो सिउने मेशिनको भारी बोकेर आइरहेका छन् । पछाडि उसकी श्रीमती छोरालाई पछाडी मजेत्रोको नाम्लो बनाएर बोकेकी छ । हातमा सानो कपडाको कुटेरो बोकेकी छ । गल्लीमा आएर दुवै उभिन्छन् र देख्छन् रने सिँगारी बाख्रालाई कँुडो दिइरहेछ । साना जुम्ल्याहा पाठापाठी, माऊको दुध चुसिरहेछन् रामेले नजिकै आएर कान्लामा मेशिन अड्याएर भन्यो, के पायो बाख्राले ? पाठापाठी त खुब रहर लाग्दा रहेछन् । एउटा पाठो एउटा पाठी रनेले जवाफ दियो । आउन बस रामे दाई ! बस्नै हुँदैन र हाम्रो घरमा ? विष्टहरु कहाँ नबसे हामी कहाँ बस्ने ? रामे र उसकी श्रीमती पुतली रनेको घरतिर पस्छन्, सेतीले एउटा चकटी ल्याएर दिन्छे अनि दुवै त्यसमा बस्छन् । पुतलीले सेतीलाई भनी अलिकति तिहुन ताहुन भए दिनोस् न वरजु ? सेतीले भनि थोरै गुन्द्रुक छ लान्छौँ त ?हुन्छ दिनोस् न त ! सेतीले एउटा प्लाष्टिकमा पोको पारेर दिन्छे अनि रामेलाई रनेको घरको संपूर्ण वस्तुस्थिति बारे थाहा छ रामेले रने तिर लक्षित गरेर भन्यो, जेठा मुखिया पाठा पाठी खुब राम्रा रहेछन् । मलाई पनि एउटा पाठी हुर्काएर दिनोस् न विऊको लागि । बाँचे भने तिरौला नि त ! यो ठूलो जातको बाख्रा हो वर्षको २ पल्ट ब्याउँछ रनेले भन्यो । यो वर्ष त हजुरको शुभ वर्ष, यता बाख्राले पनि राम्रो फाइदा उता हजुरको मुखिनि दोजिया, हुने बेलामा त ढुङ्गा माथि पनि खेती हुन्छ भन्छन्, रामेले भन्यो । प्रति उत्तरमा रनेले भन्यो तेरो मुखमा गाईको दुध भात जाओस्, यति भन्दै रामे र पुतली बिदा भएर आफ्नो घर तिर लाग्छन् ।
+
+वसन्त ऋतुको समय घाम पर क्षितीजमा देखिए । रने मकै गोडेर हातमा कोदालो र एक मुठा बेडाएको घाँस मकै लिएर घरमा आयो । पसिनाले सारा शरीर निथु्रक्क भिजेको छ । सेती घर भित्र खाना पकाउँदै थिइ । माथिबाट म्याँ ......... गरेर कराएको कारुणिक आवाज सुनियो । बाख्राको पाठो चोथलेको मकै बारीमा पसेछ । 
+
+</p>
+       <div class="page-number">Page 4</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-2">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-4">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-4" aria-label="Chapter 4">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र ४</p>
+       <h2>चौथो पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>अनि चोथलेले माथिबाट कराउँदै भनि, लौ खा .......... ! मुर्दाका क्रिया ! मरे पनि मरोस् ! अर्काको बारिमा छाडा छोडेर हरिया नोठ सोहोर्ने बजिया भन्दै गाली गर्न थाली । रने दौडेर गयो । बाख्राको पाठो भुइमा लडिवुडि खेली रहेको थियो । उसलाई प्राण जान गाह्रो भैरहेको थियो रनेले हत्तपत्त लोटामा पानी लिएर गयो अनि खुवायो । म्याँ ! गर्दै पाठोले अन्तिम रोदन छोड्दै खुट्टा फ्याट गर्दै सेता आँखा पल्टायो । त्यो देखेर रनेका आँखाबाट आसुका धारा वर्षिए । त्यहाँ बाट मरेको पाठो च्याप्यो अनि चोथलेको घरमा गयो र पाठो मिल्कायो अनि भन्यो, लौ जे गर्छेस् गर् । यो पाठोको जिम्मा तैले लिनुपर्छ । नकच्चरी ! वालो र पाठो भएपछि कस्कोले विराउदैन ? चौथले बम्कन थाली र भनि, जे नाप्छस् नाप, तेरो नाममा जथाभावी वस्तु छोड्न पाइन्छ ? अझ मुख उध्याएर बोल्छस् एक दिन होइन, दुइ दिन होइन, कति सहने ? सदा सर्वदा अर्काको बारीमा वस्तु छाडा छाडेर हरिया नोठ सोहर्ने नकच्चरा ! यी सुन्तलाका विरुवा समेत सिख्रै पारीसक्यो भन्दै चोथले फलाक्न थाली । चर्को आवाजमा बोलेको सुनेर पञ्च भलादमीहरु एकै छिनमा चोथलेको आँगनमा भेला भए । गैरा बारी साने आजकल न्याय निसाफमा निकै अघि सर्छ । निमुखा गरिबहरुलाई जुधाएर उनीहरुको भाँड भैलो हेर्ने उसलाई निकै आनन्द लाग्छ । तर्कको मुढे बलले साधुलाई चोर र चोरलाई साधु बनाउने उसको स्वभाव छ । दुई पक्षलाई भिडाएर उनीहरुको चर्तिकला हेर्ने र त्यसमा निर्णायक भूमिका उसैको र त्यसबाट नाजाहेज फाइदा उठाउने ऊ एक नम्बर फटाहा छ ।ऊ गाउँको पढे लेखेको मान्छे भनेर उसैलाई इन्साफ गर्न अघि सार्छन । आज पनि जमातमा उसैको उपस्थिती छ । 
+        
+        चोथलको आँगनमा भलादमीहरुको कचहरी शुरु भयो । सबै बलेकै आगो ताप्छन् निभेको आगो को ताप्छ र ? भोलि गाह्रो साह्रो केही पर्दा दुइचार पैसा चलाउने उही चोथले थिइ । उसको लोग्नेको पेन्सन थियो । तर विचरा रनेको एक पाखुरी मात्र । आज आँगनमा विचारीको रुपमा साने छ । सवैले पाठो मारेकोमा आपत्ती जनाए । अन्तिममा सानेको पालो आयो । कसैले जानीजानी मार्छु भनेर कसले मार्छ ? अन्जानमा कहिलेकाहीँ त्यस्तै हुन्छ । पाठोले पनि सुन्तलाको विरुवा सखाप पारेछ । अब विगो दुवैको बराबर देखिन्छ भन्दै बहिदार बुढालाई कि कसो सान वा भन्दै आँखा तन्काउँछ । बहिदार बूढाले सही भनिस् साने भन्दै कुराको आदि र अन्त्य यही हो भन्दै इन्साफको बिट त्यही मारियो । रने दुःखी हुँदै मरेको पाठो त्यही छोडी खुइया सुस्ताउँदै अनि आन्तरिक प्रतिक्रयाका साथ समाजको निर्णय प्रति मानिसलाई हेर्ने दृष्टिकोण प्रति उसलाई घृणा जाग्छ । सारा शत्रु र मित्रु बनाउने पैसा, आफन्त पराई बनाउने पैसा, मान्छेलाई बाध्ने फुकाउने पैसा, न्याय र इन्साफमा पैसा, यो देखेर रनेलाई समाज देखी घृणा जाग्छ । अनि सोच्न थाल्छ, यो सबै गरिवीको प्रमुख कारण हो भन्ने उसलाई लाग्छ । सेतीले घरमा आएर सोध्छे ? के गर्‍यो त समाजले ? पसिना पुछेर सुइया सुस्केरा हाल्दै रनेले भन्यो सबै बलेको आगो ताप्दछन् के हुनु गरिव मर्‍यो सकीयो । हुने खानेले जे गर्दा पनि हुने उनीहरुका केही बिराउन नहुने रे हाम्रो चाँहि कुरा सकीयो । 
+</p>
+       <div class="page-number">Page 5</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-3">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-5">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-5" aria-label="Chapter 5">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र ५</p>
+       <h2>पाँचौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>प्रभातको लाल किरण गरिव रनेको घरमा झुल्कियो । तत्पश्चात सेतीले कोखबाट नवजात शिशुलाई जन्म दिई । च्याँहा गर्दै बच्चाले आवाज निकाल्यो । रनेलाई के जन्म्यो भन्ने उत्सुकता जाग्यो र मनमा कुरा खेल्न थाले पणिनि माईलिले सुडेनीको काम गरिन । आखिर सेतीले छोरी जन्माइछ । रनेलाई शिशु भन्दा प्यारी सेतीलाई केही नभई दिए हुन्थ्यो अर्थात् स-कुशल सुत्केरी अवस्थाबाट उम्कीदिए हन्थ्यो भन्ने मनमा कुराहरु खेल्छन् । सेतीको शरीर हल्का भयो पणिनिले आएर एउटा फुलको थुँगा टिपेर रनेलाई टाउकामा लगाइदिन् अनि भनिन् बाबु दुःख नमान्नोस् नानी जन्मीई । बुढेसकालको साहारा जे भए पनि ठीकै छ । हेर्ने उनै एक परमेश्वरको खटन् उहाँले जे दिनु हुन्छ त्यही हात थाप्नु पर्छ कि कसो ठुल्नानी ? (पणिनी रनेलाई ठुल्नानी भनेर बोलाउछे) रनेले पनि त्यसमा सही थप्दै भन्यो ठीकै भन्नु भो भाउजु ! मलाई सन्तोष छ । रनेले एक छिनपछि खोरबाट रातो भाले निकाल्यो क्वाँए क्वाँए पार्दै काट्यो । आफैँले बनायो र सेतीलाई पेट भरी खान दियो । अनि साँझ पर्‍यो । दियालोको उज्यालोमा कोठा जगमग भयो । अनि रनेले सेतीलाई कानै नेर गएर भन्यो । देखिस त सेती हामीलाई अपुत्रो भन्नेका बल्ल मेख मर्ने भयो । सेतीले खुशी हँुदै भनि, "हजुर को इच्छा आज पुरा भएको छ ।"
+
+दिनहरु बिते छोरी पनि ११ दिनकी भई न्वाहरानको दिन आयो । पण्डित वा जयरामले छोरीको टिपन हेरेर भविष्य वाणी गरे यो बच्ची चाइने बडो लक्षीनकी हुन्छे । चाइने यसको राज ग्रह परेको छ । अलिकति राहुको दशा छ । यसो चाइने स्वस्ती शान्ती अथवा रुद्री पाठ गराई दोष मेटाउनु होला । रनेले आफ्ना वरपरका दाजु भाईलाई बोलायो सानो भोजको आयोजना गर्‍यो । पण्डित बा जयरामले छोरीको नाम भुन्टी राखिदिए । भुन्टी बढ्दै गई, हुर्कदै गई । तोते बोलिमा माम, माम, बा-बा भन्दै भोटो लगाएर आँगनमा भुन्टी दौडदा रने र सेती खुसीले गद्गद् हुन्छन् । त्यो बाल कृडा हेरेर दङ्ग पर्छन अनि रमाउँछन् । सारा दुःख बिर्सन्छन् । अनि रमाइलो संसारको महसुस गर्छन् । हुनेहार दैव नटार, सेती फेरी दोजिया भएकी छे । सङलो मन, हँसिलो अनुहार र बोलीमा मीठास भएकीले गाउँलेहरुको ऊ उदाहरण बनेकी छे । गरिव भएपनि स्वभाशिली स्वास्नी पाएकोमा रने खुशी छ । बेलुका सुत्ने बेलामा चौठामा तेल लिएर ऊ रने छेउ जान्छे । यो उसको नित्य कर्म हो । श्रीमान्को सेवा स्त्रीको धर्म हो भन्ने कुरामा उसलाई विश्वास छ । त्यति मात्र होइन रने मेलापात गएका बेला घरमा मिठो चोखो पाके रनेलाई पेटभरि नखुवाए उसलाई सन्तोष हँुदैन । आँफु थोरै खाएर भए पनि रनेलाई टन्न खुवाएर उ बल्ल खाना खान्छे ।
+</p>
+       <div class="page-number">Page 6</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-4">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-6">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-6" aria-label="Chapter 6">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र ६ </p>
+       <h2>छैठौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>एक दिने रनेले भैँसी फुकाएर आहाल बसाउन लग्यो । भैँसी धेरै दिन पछि फुस्कन पाउँदा स्वतन्त्रताको उन्मादमा बुर्कुसी मार्दै पाताल तिर लाग्यो अाँई आ भन्दा भन्दै दुई जना मान्छेले छाता ओडेर आएको देखी चापपानीको भिर तिर छास्सियो र एक छिन पछि दङ्ग गरेको आवाज आयो । रने पछि -पछि लाग्दा लाग्दै यसरी भैँसी भिरबाट खसेपछि उ तल ओल्र्यो । भैँसी छट्पटाई रहेको थियो । कुवाबाट हत्त-पत्त अञ्ँजुलीमा पानी खुवायो । भैँसीले आँई गर्दै अन्तिम विदा लियो । रनेको शरीरमा चिटचिट पसिना आयो र थचक्क भुइँमा बस्यो । परबाट लुरे दमाई काँधमा मुढो बोकेर घटनास्थलमा आइपुग्यो । के भो जेठा मुखिया आज भन्दै लुरेले सोध्यो । हेर न लुरे आज मैले दशा लागेर भैँसी फुकाएछु । अहिले यो गति भयो । बुढीले घरमा भैँसी फोहोरीयो भैँसी आहाल तिर लानुपर्‍यो भनि मैले पनि मनासीव ठानेर भैँसी फुकाएँ एैले भैँसी मर्‍यो । हेर जेठा मुखिया । जे हुनु भै गो चिन्ता मानेर हुने केही छैन । अब गार्भिणी भैँसी भरे भोलीको कसैले पनि खाँदा पनि खाँदैनन् अब यतै खाल्टो खनेर गाडिदिनु बेस होला मुखिया साब । यति हुँदै गर्दा गाउँलेहरु सबै घटाना स्थलमा ओइरिए घटना निकै दु : ख दायी थियो । रनेलाई सबैले नआात्तिनु भनि सान्त्वना दिए अनि भने यो सब ग्रह दशा लागेर यस्तो भयो । यति हुँदा हुँदै सेती मजेत्रोले छोरी बोकेर घटनास्थलमा आई अनि रुन लागि सबैले उसलाई सम्झाई बुझाई गरे । एक छिन पछि सबैले गैची, गल, कोदालो लिएर उपस्थित भए । एकै छिनमा खल्टो तयार भयो अनी भँैसी पुरपार पारेर सँबै घर तीर लगे । रने खुइया गर्दै सेतीको पोल्टाबाट छोरीलाई लिएर घरतिर लाग्यो । हरे वल्ल तल्ल जोरेको भैँसी आज वुटी नै मासियो । अब मुखीयाको ऋण पनि कसो गरी तिर्ने । भकारो अब खाली हुने भयो । मेरो कस्तो दुर्भाग्य रहेछ । भोली समाजमा गाह्रो साह्रो चलाउने उही मुखिया हो । भनेको बेलमा तिर्न सकिएन भने वद्नाम हुन्छ यस्ता चिन्तनमा रने डुविरहन्छ । वल्लतल्ल नानीलाई ब्याए पछि दुध खुवाउला है भनी राखेको भैंसी नदेख्दा छोरीले भोली पल्ट सोधि हाम्मो आई खै बा ? हाम्मो भैँसी मरेको हो् ? त्यो वाल वोलिको उत्तर उ दिन सक्दैन व्याए पछि आई बुबु खाने भनेको होइन बा ? अब कहिले ब्याउँछ ? भनेर दोस्रो प्रश्नले उसको शरीर काम्न थाल्छ । हरे ! आज मैले यो बच्चाको पेटभरी दुध खाने चाहाना पनि पुरा गर्न सकिन । म मात्र एक अभागी बाबु रहेछु । एउटा बच्चाको इच्छा समेत पुरा गर्न सकिन । भोली मुखियाको मुख बुझो कसरी लगाउने ? यी सब आर्थिक मामिलामा रने छट्पटी रहन्छ । पिरोलीन्छ । न रातमा निद छ न दिनमा भोक ।
+
+	दुखीया रने प्राणको बाजी राखेर तारे भिरमा घाँस काट्छ । कयौँ दिन बिते एउटा थोरे भैँसी ल्यायो । वाली गयो । अब त ब्याउँछ भन्ने आशामा सम्पूर्ण थकान मेटिन्छ तर दुर्भाग्या सम्पूर्ण कल्पनाहरु चकनाचुर भए । हो कसको मन दुख्दैन र वर्षौ दिन पर्खेर लगाएको वालीमा अकास्मात हिमपात भई वाली नष्ट हँदा । जब रात पर्छ, सोतेमा तमाखु ट्वार्र-ट्वार्र शुरु हुन्छ । रने रात भरी रामायणको श्लोकहरु यसरी गुन्गुनाउँछ ।
+	
+  एकदिन हनुमान म चित्र कुटमा ।
+	रामका नजिकमा गया ।। 
+	खानु र पिउनु मिठो र मसिनु ।
+	एक घान मकैमा रह्या ।।
+	ओड्ने र ओछ्याउने सिरक र डसना ।
+	खाली रह्या चित्रामा ।।
+	भएत दिँदा हुन रहिन्छ घरमा ।
+	सँझील्याए भित्रमा ।।
+</p>
+       <div class="page-number">Page 7</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-5">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-7">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-7" aria-label="Chapter 7">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र ७</p>
+       <h2>सातौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>
+रनेको गुन्गुनाहटले सेतीको निद्रा भंग हुन्छ अनि रातभरी नसुतेकोमा गाली गर्छे र भन्छे नसुतेर के गरी राख्या भन्या ? तँ आराम सित सुत भइहाल्यो नि ! मलाई किन कचकच गरीराख्या भन्या । मलाई यो दुई रात भो पटक्कै निद छैन । के भयो, के भयो । पिर गरेर हुन्छ र हुने हुनाऊ भै सके पछि । सेतीले जवाफ दिन्छे । सेतीको करले रने पल्टन्छ । आँखा वरिपरि मुखिया बा को अनुहार नाचिरहन्छ । यदि वेइमान भइयो भने भोली समाजले पनि पत्याउन छोड्छ । जोरी पारी मेरो दशा देखेर खित्का छाडेर हास्ने छन् । ठिकै छ हासुन् ! दिन नलागे हुन्छ । ऋण लागेर केही हुन्न भनी बुढा पाका भन्ने गर्दछन् । तर मेरो पनि अब त्यही एक माल बाख्रा र एक हल गोरु त छ । विचरा त्यो रामे दमै पनि एक छाक खाएकै छ । न उसको बारी छ । न वस्तु भाऊ । यस्ता चिन्तनमा डुब्दा-डुब्दै रने निन्द्रा देवीको काखमा पल्टन्छ ।
+
+
+भैँसी मरेको केही दिन वित्यो । कोपारामा रने बाख्रालाई कुडो खुवाउँदै थियो । मुखिया बा रनेको घरमा टुप्लुक्क आइपुगे । रनेले मुखिया बालाई पाउमा ढोगिदियो । मुखिया बाले जुँगा मुसार्दै कुराको मेलो सुरु गरे । चाइने रने तेरो तत्दीरमा पनि भँैसी पालेर खान लेखेको रहेनछ । चाइने मैले पनि यतिका दिनसम्म भाखा पर्खेर बसेकै हुँ । चाइने, अब के गर्छस् गर बाबु ! चाइने मेरो रुपियाँको ब्याज यतिका दिन सम्म पाएको छैन । साँवाको को त कुरै छोडौ । चाइने मेरो पनि रुखमा फलेको धन होइन क्यारे । त्यसो भएर चाइने अहिले ब्याज मात्र भएपनि दे बाबु । मैले पनि तेरो कल्याणै होस भनेर भैँसीको थोरे किन्न पैसा दिएको हुँ । चाइने तेरो तग्दीरमा नभए पछि के गर्ने ? मुखिया बा का आँखा रनेले कँुडो खुवाउदै गरेको सिंगारी बाख्री माथि परे । तिन वटा पाठा कालो र सेतो शरिर ठुलो कल्चौडो । दुई वटा बोका अनि एउटा पाठीको माउ देख्दै लोभ लाग्दो । सोझो रनेले मुखिया बालाई सोतेमा तमाखु ल्याएर टक्रयायोा । मुखिया बा कुडुरु कुढुरु भित्तामा आडेस लगाएर तमाखु तान्न लागे । प्रतिउत्तरमा रनेले जवाफ दियो मुखिया बा मलाई ऐले दशा लाग्या रहेछ । वेला वखतमा तपाईले मलाई सहयोग गर्दै आउनु भयको हो । जे भएपनि साँवा नसके पनि ब्याज आउने दशै सम्म यही सिंगारी बाख्रीका पाठा हुर्केलान अनि बेच बिखन गरेर तिरौला हुन्न ? त्यो सुनेर मुखिया बाले कुरा कस्न थाले । चाइने गाह्रो साह्रो एक पटक मात्र होइन पटक पटक चाइने अभाव आइनै रहन्छ । चाइने तँलाई परेका गाह्रो साह्रो आज सम्म मैले नै चलाउँदै आएको छु । फेरि पनि हेर्न पर्ने हुन्छ । चाइने किन पछि लफडा गर्छस ? यो बाख्राको माउ फुकाई दे ब्याज चुक्ता हुन्छ । साँवा मिलाउँदै गरौला कि कसो रने ? उनको राता राता आँखा र बचन सुन्दा रने त्रसित भयो । भोलीको बाटो पनि राख्न पर्नी हुन्छ । साहुको मुख पनि टाल्नै पर्ने उ धर्म संकटमा पर्‍यो । अनि उसको मुखबाट निस्क्यो, यो त सब सेतीको पेवा हो । उसैलाई सोध्नुहोस् । सेती भित्र भान्छामा खाना पकाउँदै थिई । सेती ! ए सेती ......... । 
+
+</p>
+       <div class="page-number">Page 8</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-6">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-8">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-8" aria-label="Chapter 8">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र ८</p>
+       <h2>आठौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>
+रनेले सेतीलाइ्र्र बोलायो सेती हत्तपत्त हस्याङ फस्याङ गदै सेती बाहिर निस्की मुखियाले कुरा शुरु गरे । चाइने यतिका दिन भो मेरो बाँकी पैसा न ...........चुक्ता गछौ न ब्याज तिर्छौ त्यसैले साँवा नदिए पनि ब्याज त देउ नत्र यो बाख्र्र्र्र्रो फुकाइदेउ । के गर्नु मुखिया बा यो त मेरो माइतिको पेवा । यसो चुरा टिका लाउने बाटो यही छ । त्यस माथि दावा नगर्नाेस्। चाइने पेवा सेवा जान्दिन खुरुक्क मेरो पैसा गन नत्र खुरुक्क बाख्रा फुकाई दे । निमुखा गाउँलेहरुलाई गाह्रो अप्ठ्यारो पारी निमोठेर कठोर बनिसकेको मुखियामा दयाको भावना किन पलाउथ्यो । उनि भोको बाघले शिकार खोज्दा जसरी आफ्ना रिसको आवेशमा आफ्ना नेत्रहरु राता-राता पारेर बाघ गर्जेझै उसै गरी मुखिया गर्जिए । श्रम र श्रमीकको मोल मोलाई गर्ने शक्ति कम हुन्छ । विचारा रनेले सोच्यो ठुलो रुखको आड लागे एक झर पानी ओत्छ भन्ने बुढा पाकाको उखान संझियो । सेतीलाई सम्झायो र टाट्नोबाट बाख्राको दाम्लो फुकायो । यो दृश्य भुन्टीले सेतीको बुइमा बसेर देखि रहेकी थिई । अनि दाम्लो हातमा राख्दै रनेले भन्यो दुःख नमानन्नुहोस् है मुखिया बा ! बाख्राको दाम्लो हातमा समाउँदै मुखिया बा अगाडि लम्कदै थिए अवोध बालिका भुन्टी रुन लागि हाम्मो मुनी गयो बा ! हाम्मो मुनी गयो । बाख्रा लगेपछि भुन्टी लडिवुडि खेलेर रुन लागि मुखियाले बाख्रो घिच्याउँदै लगे । म्याँ र प्याँ प्याँ गर्दै पर सम्म मुखियाले बाख्रो लादै गरेको दृश्य रने र सेतीले हेरी रहे । अनि भुन्टीलाई सम्झाउँदै रनेले भन्यो छोरी आक्को मुनी किनेर ल्याउने हगि । आक्को मुनी ल्याउने ? अँ आक्को मुनी ल्याउने ? भुन्टी खुशीले उफ्रदै खेल्न गई । रने ट्वाल्ल परेर हेरिरहयो । 
+
+
+सिरान गाउँको विचमा अवस्थित सानो झुपडी माटाको गाह्रो , गलिसकेको फुसको छाना , गाह्रोको छेउछेउमा वर्षातको पानीले परेको लेऊ तै पनि त्यो घर सुन्दर छ न्यानो छ । विहानी पख जव प्रभातको लाल किरणहरु छिडकीरी मादै भित्र छरिन्छन् दुख बिसाउँदै सुर्यस्त सँगै अलप हुन्छन् । भुन्टी त्यस घरकी तारा छे । दिन भरको थकाईपछि सुस्ताउँदै आँगनमा जब रने पुग्छ , भुन्टी हाम्फाल्दै काखमा पुग्छे अनि उ सोध्छ , के खायो आज मेरो बाबाले ? प्रतिउत्तरमा उ भन्छे जाउलो । तोते बोलिमा घरि पल्तिर उफ्रदै उ जब आँगनमा खेल्छे । अनि बाबुलाई सोध्छे , हाम्मो मुनी कहिले ल्याउने बा ? रनेले उत्तर दियो , भोलि !
+
+संयौ भोलि बिते रनेको बचनलाई भुन्टीले पत्याउन छोडीसकी । बल्ल तल्ल रनेले पल्ला गाँउको श्रीमाने सँग अधियाँमा बाख्रा लिएर आयो र भुन्टिलाई भन्यो । आज तेरो बाबाले मुनि ल्याइदिएको छ । भन्दै तगारोमा बसेकी भुन्टीलाई सम्झाउँदै उ अगाडी बढ्छ । भुन्टि फेरी सोध्छे , खोइ त सानो मुनि ? उ जवाफ दिन्छ , भोली पर्सि ब्याउँछ अनि सानो मुनि पाउँछ भुन्टि रमाउँदै फेरि खेल्न जान्छे । 
+
+शिशिरको कलिलो घाम डाँडा माथि झुल्क्यो रनेको सानो झुपडीमा नवजात शिशु जन्म्यो बुढेसकालको बेला यो खुसि उसको मात्र खुसि थिएन, एक दुइ छोडी सारा गाउँलेको खुसी थियो । 
+</p>
+       <div class="page-number">Page 9</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-7">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-9">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-9" aria-label="Chapter 9">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र ९</p>
+       <h2>नवौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>जोरीपारी कसका हुदैनन् र ? आफ्ना पाखुरीको कमाइमा खादा समेत मान्छे मान्छे सँग डाह गर्छ । यस्ता संकुचित विचार मान्छेमा जन्मन्छ । अर्काको खोइरो खन्न समेत मान्छे पछि पदैन् । अर्काको अवनतिमा हाँस्ने र उन्नतीमा डाह गर्ने परम्परा आदिकाल देखि चल्दै आएको छ । अलिकती बचे खुचेको सम्पत्तीमा छोरा नभएकामा अपुताली भेटिन्छ की भनेर गिद्धे नजर लाउने मने र रिठे जस्ताको आशा पनि टुट्यो । रनेको घर दैलो लागोस् भन्नेको आज मुख बुझो लागेको छ ।
+
+	सिकुवामा टाउको गुथेर सेती सानो शिशुलाई तेल लगाउन थालेकी छ । बाहिरबाट भुँन्टी सानो आँखी झ्यालबाट च्याएर हेर्छे । अब आमा नजिक जान उसलाई संकोच छ । भाई जन्मे पछी उ बाबु सँगै सुत्छे रने जता गयो उ पछि पछि लाग्छे । आज उसको खेल्ने काख खोसिएको छ । च्याहाँ च्याहाँ बच्चा रुँदा उ अनौठो अनुभव गर्छे । चौविसै घण्टा आमासँग झुम्मिने स्वभाव आज परिवर्तन भएको देखि सेती र रने छक्क पर्छन । भुन्टि आज पाँच बर्षकी लागिसकी तोते बोली र सरल स्वभाव हंसीलो अनुहारले घरमा एउटा तारा उदाएको भान रनेलाई हुन्छ ।
+
+आफ्ना गोरु लिएर चैत्र वैशाखको प्रचण्ड घाममा अनौ समातेर हलो जोत्दा उसका टालेका बस्त्रहरु अनि धेरै फाटेको टोपी निथु्रक्क भिच्छ अनि टौवा मुनि गोरु अड्याएर एक सर्को कंकड खादै गर्दा उताबाट हस्ते आउँछ । हातबाट चिलीम हस्तेलाई दिदै रने भन्छ, आज जस्तो घाम कहिल्यै भएन है ठुले ! एक दुई सर्को कंकड हस्तेले तान्दै भन्छ, हो त नि । गोरु धकेर उ फ्याँ फ्याँ गरिरहेछन् । फेरि एक सर्को कंकड तान्दै हस्ते भन्छ, कंकड त बडो खरो रहेछ है रने ? रने यसो खडिया ढिकीमा कुटेको त्यतिराम्रो भएनछ । कुराको प्रसङग मोडीन्छ । हस्ते मलाई त तेरो छोरी नै औधी मन पर्छ भने , तिरतालकी छे कुरा गर्न अनि साइनो लगाउन सिकाउनै नपर्ने । रने अँ ठुले त्यो जन्मे पछि मेरो दिनभरको दुख यसैले बिर्साउछे । हस्ते अँ आमा गुणकी छोरी बाबु गुणको छोरो भन्छन् हामीले आँखा नदेखेर यो गति भयो अब छोरीलाई पनि पढाउनु पर्छ है रने । पल्तिर माने डाडाँमा जर्मनले स्कुल खोदिदिएको छ । चिठ्ठी सिठी लेख्न पढ्न जाने भै गो । 
+
+	बिस्तारै आकशमा बादल लाग्यो । धर्तिमा शितलता छायो । रने गोरु लिएर फेरी न्याउरे खेत जोत्न लाग्यो । जब एक जुवा घाम आकाशमा देखापरे, रनेले गोरु फुकायो । हातमा नारा र जोतारो लिएर घर आयो । घाम डुबिसकेको थियो । आँगनमा देखा पर्‍यो । भित्र भुन्टि रोइरहेकी थिई विहान जस्ताको तस्तै छाडेर गएकी छोरी बेलुकी आएर घरपसी सेतीसँग सोध्दा, सेतीले जवाफ दिई आज छोरीलाई भुङग्रे ज्वारो आएको छ । रनेले आफ्नै हातले छाम्यो, ज्वारोले भुन्टी छटपटाई रहेकी थिई । हत पत एक मुठी चामल लिएर धामी माइलाकहाँ गयो, धामी माइलाले सोधे किन आइस् त रने आज म कहाँ ? छोरी ज्वारोले धपक्क बलेकी छे, के को दोष हो यसो जोखान हेरीदिनु पर्‍यो हातको चामल सालको पातमा राखिदीदैँ रनेले भन्यो । धामी माइलाले जोखान हेर्न थाले । टुक्रएका चामलका गेडा पाखा लगाए अनि सग्ला गेडा देवी, काली, महाकाली र महा सरस्वतीलाई भाग लगाए । जोर बिजोर हेर्न थाले । हेर्दा, गाउँकै घुमिहीड्ने सुन झाँक्रीको दोष ठहरियो । अनि उनले एउटा भाले ठिक पारीराख्न आदेश दिए । रने घर फक्र्यो । छोरी ओछ्यानमा लडीवुडी खेली रहेकी थिइ । झटपट चामेसँग उधारोमा एउटा भाले लिएर आयो । अनि पुजा सर्जाम तयार पार्‍यो । धामी माइलाले कोदाको सोल्मा तयार पार्न ढिडो पकाउने आदेश दिए र रनेले झटपट कोदाको सोल्मा बनाउने ढिडो र अन्य सर्जाम तयार पार्‍यो । जसमा पहँेला फुल, अक्षता, मास, खरानी सारा तयार भयो । धामी माइलाले फुकफाक गर्न र पुछ्पाछ् गर्न शुरु गरे ।
+</p>
+       <div class="page-number">Page 10</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-8">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-10">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-10" aria-label="Chapter 10">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र १०</p>
+       <h2>दशौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>
+भाले लिएर भुन्टीको शरीर वरिपरि घुमाउँदै धामी माइलाले भने, ल तिमी डुलि हिँड्ने, खेलि हिँड्ने बन झाँक्री, सुन झाँक्री । रिठ्ठे झाँक्री को हौ ? तिमीलाई आज यो सुनचरी टक्रयाएको छु । तुरुन्त यस बालोलाई छोडी देउ र आफ्नो स्थानमा गएर बस । नत्र फेरि तिम्रो बेइज्जत होला । त्यसपछि धामी माइला टपरीमा बनाएको सोल्मा फुल अक्षताका सर्जाम लिएर पर देउरालीको दोबाटोमा पुगे, त्यसपछि ध्वजा पतका सोल्मा माथि चढाए अनि भट्भटाउन थाले अन्त्यमा भाले काटेर रगतको बलि दिए । फर्केर घर आए रातभरी रक्सी र कुखुराको मासु डकार्दै विहानीको प्रहर घरतिर लागे । त्यस विहान भुन्टीलाई ज्वारो केही कम भयो । रनेले भन्यो बल्ल आज ज्वारो कम भयो भुन्टीको आमा ! साँच्ची धामी माइलो टाने टुनेमा कम छैन । लाइलगन त दोलो पार्छ । सेतीले भनी विचरा लगाउन सम्म गुन लगाए धामीले । जब दुवैमा आशाको त्यान्द्रो पलायो अनि आ आफ्ना काम तिर लागे । 
+
+जब बेलुका साँझ पर्‍यो भुन्टीलाई फेरी ज्वारोले चाप्यो । उ ऐया बा ऐया आमा भन्दै ओछ्यानमा उफ्रन बज्रन थाली । रातभर काखमा लिएर रनेले भुन्टीलाई रात गुजार्‍यो । उ ऐया बा ऐया बा गरि रही । सेतीलाई पनि पटक्कै निन्द्रा परेको छैन । आएर भुन्टीको टाउको छाम्छे भुङग्रे ज्वारो आएको छ । के भो मेरो बाबालाई भन्दै भुन्टीको गाला मुसार्छे । टाउको दुख्यो भन्दै उ छटपटि रहन्छे । सेतीले भनी हैन बुढा छोरीलाई चापेको छ । अस्पताल लगिहाल्न पर्छ । बल्ल तल्ल बुढेस कालमा जन्मेको सन्तान तलमाथि केही भइहाल्यो भने ............. । त्यसैले बेलैमा विचार पु¥याउनु पर्छ । त्यो त ठिकै भनिस् सेती तर हामी सँग कौडी छैन । कौडी बिना केही चन्दैन । आज भोलि के गर्छेस् । त्यसो भए यै कानका मुन्द्रा लिएर जानोस् बेचबिखन गरी उपचार गरौं हुन्न ? के गर्नु तँलाई पनि गहनाको नाममा केही जोरी दिन सकेको छैन । त्यस माथि कानमा लगाएको एक जोर माडवारी पनि बेचिदिंदा भोली देखि बुच्चै हिड्नु पर्छ के गर्छेस् ? के गर्ने त बुढा ? अल्नो पनि नखाउ, नुन ढिकी नी नफोरौं भनेर भएन । छोरीको उपचार त गर्नै पर्‍यो । 
+</p>
+       <div class="page-number">Page 11</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-9">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-11">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-11" aria-label="Chapter 11">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र ११</p>
+       <h2>एघारौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>विहानको समय कुखुरा बास्यो । सेतीले आफ्नो कानका मुन्द्रा बलैले फुकाली अनि रुमालमा पोका पारिदीई । ल अब भाले पनि बास्यो छोरीलाई बोकेर बाटा लागे हुन्छ । रनेले हत-पत सेतो कछाड लगायो बाहिर इष्टकोट लगायो इष्टकोटको भित्र पट्टि रुमाल राख्यो भुन्टीलाई पनि बुट्टे जामा फेरी दियो । अनि सेतीलाई भन्यो । वस्तु भाउको तह मिलाउनु म कतिबेर लाग्छ आउन थाहा छैन । सेतीले छोरीलाई भनि छोरो बा सँगै डाक्टर कहाँ ओखती खान जाउ है । भुन्टीले मुन्टो मात्र हल्लाई र भुन्टीलाई बोकेर रने विहानको मिर्मिरेमा चौतरा तिर हिड्यो । उ हिडेर जब गौराती डाँडामा आयो अनि "गौराती भिनसेनलाई भाकल गर्‍यो, गौराती भिम्सेन मेरो छोरीलाई केही नहोस् ।" जब चौतारा बजारमा रने प्रवेश गर्‍यो चारै तिर नजर लगायो । एउटा सुन चाँदी पसल देख्यो अनि अगाडि बढ्यो । सोझो रनेले पसले सँग भन्यो साउजी मेरो एउटा समस्या छ । छोरी विरामी भएर ल्याएको साथमा एक पैसा पनि छैन मेरो यो माडवारी अडाना एक महिनाका लागि राखि दिनुपर्‍यो । सुनार बुढाले भने दिए निखनेर लिन्छु अडाना सडाना म राख्दिन र खै सुन देखाउनु होस् त । रनेले रुमालबाट झिकेर देखायो । सुनार बुढाले पनि गाह्रो अप्ठ्यारो बुझेर आफ्नो रबाफ देखायो । यो सुन चाहि नम्वरी होइन यो त निकै पुरानो रहेछ । कसी लगाउँदा ल हेर्नोस् पुरा सेतो देखिन्छ । रनेले जवाफ दियो सुन त राम्रै हो मिलाएर दिउँला साउजी । मौकाको फाइदा त उठाउनै पर्‍यो भन्नी मनसुवा राखेर उसले सकेसम्म भाउ कस्न शुरु गर्‍यो । गाह्रो साह्रो टार्नै पर्ने के गर्ने रनेले भन्यो ल ल जती हुन्छ म मिलाएर दिन्छु यती भने पछि सुनार ले काँटामा सुन राख्यो ल यो सुन ४ हजारको रहेछ दिने भए दिनोस् । नत्र फिर्ता लैजानुहोस् । विचरा समस्याले जकडीए पछि रनेका हात तल पर्ने नै भए । अनि उसले माल निखनेर दियो । अनि पैसा लिएर अगाडि बढ्यो । विष्णु मेडिकल हलमा पुग्यो । डाक्टरले भुन्टीलाई ज्वारो नापे एक सय ४ ज्वारो रहेछ । उनले छोरीलाई २, ४ दिन यही राख्नु पर्छ । यसो हेर्दा म्यादे ज्वारो जस्ता छ । किन यतिका दिन सम्म नजचाउनु भएको भन्दै डाक्टरले गाली गरे । रनेले भन्यो, गाउँ घरतिरको लाइलागन होकी भनेर धामी झाँक्री लाइयो हजुर केही नलागे पछि यहाँ ल्याएको । रने २, ४ दिन सम्म त्यही बस्यो । विस्तारै भुन्टीको ज्वारो पनि कम हुँदै गयो ।
+
+धेरै दिन भो विरामी छोरी लिएर गएका बुढा घरमा आएनन् सेतीलाई चिन्ताले सतायो । सानो बच्चा घरमा वस्तुको ठहल त्यस माथि मानसिक चिन्ताले उ सखाप भैसक्न लागि उ भन्छे हे भगवन् पापी काल मै माथि आए पनि हुने । ४, ५ दिन भै सक्यो बाटा तिर हेरी र बुढाको पत्तो फाँट छैन के गर्ने भनेर मनमनै गम्दै उ पधेरा तिर जान्छे । चमेली बाटामा भेट हुन्छे । चमेलीले भनी आयु भाउजु कान के गरी बुच्चो पारेकी ? कानमा कालि सिन्कीका डाठ उनेकी सेती सँधै जस्तो उज्वल अनुहारमा थिइन् । उसले चमेलीलाई भनी भुन्टीलाई ओखती मुलो गर्न चार पैसा भएन त्यसैले फुकालेर ओखती गर्न पठाएँ । के गर्नु आफ्ना सम्पत्ति भन्नु नै यी लालावाला हुन् । आज चार दिन भै सक्यो बाऊ छोरीको पत्तो छैन । चिन्ताले मेरो आधि मासु भै सक्यो । भन्दा भन्दै रने र भुन्टी पर बाटामा आए । ल हेर त भन्दा भन्दै भुन्टी आइपुगी । यसको लामो आयु रहेछ । चमेलीले भनी । साथमा एउटा गुडीया पनि ल्याएकी रहीछे । हत्पत् उसले आमालाई मामा मामा पापा पापा गर्ने गुडीया देखाई, रनेले पँधेरामा हात धोयो । कल कल चिसो पानी खायो अनि हातको सानो झोला सेतीलाई दियो । पानीको गाग्रो आँफैले बोक्यो ती तीन प्राण सानो घरतर्फ लागे । घर मा पुगे पछि रमझम खुशी छायो । 
+</p>
+       <div class="page-number">Page 12</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-10">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-12">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-12" aria-label="Chapter 12">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र १२</p>
+       <h2>बाह्रौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>जलवायु परिवर्तनले त्यो वर्ष त्यति पानी परेन, जुगल हिमाल पनि पुरा हिउँले ढाकिएको थियो हेमन्त ऋतुको समय फाँटमा भकारीकोगोठ हाल्ने चलन किसानहरुको छँदै थियो । साथै परालको दाई गर्ने काम हँुदै थियो । त्यसै क्रममा भाइको टहल गर्ने काम भुन्टीको थियो । कटुचे खेतको दाई, पर्मा लगाएर दाई गर्ने चलन् खेतलाहरु आफ्ना काम गर्दैछन् शंकरलाई झोलुङ्गमा राखेर सेती पराल केलाउँदै छे । भुन्टी झोलुङगाको डोरो समातेर बसेकी छ । ति अवोध बाल बालिकाको मुखबाट संयुक्त बाल सुस्केरा यसरी निस्कीयो । "अल्लो खोलो, पल्लो खोलो धमिरको गोलो सिईदे दमै च्याट्ट पारी कान्छी लाउने चोलो " सबै खेतालाको मन मस्तिष्कलाई यी बाल सुस्केराहरुले तान्यो । तर रनेको शरिर धानको ह्रास देख्दा कम्पित भएर आयो । कारण उसले बजिर सिङको जग्गा ठेकामा कमोद गर्दै आइरहेको थियो । बजिर सिङ आफ्नो कुप्रे लठ्ठी माथि चिउँडो राखेर धानको ह्रास हेरिरहेको थियो । ठेक्का पनि कम थिएन । जम्मा १५ मुरी बुझाएर बचेको आफुले भित्राउन पाईने । थर्र काम्दै रनेले बजिर सिङलाई भन्यो यो वर्ष खडेरीले धान फलेन साहुबा । बजिर सिँहले भन्यो ,चराले बिस्टयाएको भन्दा बढी मल हालिनस कहाँ बाट वर्षन्छ त धान ? जहाँ गोबर त्यहिँ दोबर भन्छन् । रने होइन साहुबा ! मेरो दास्ती कम भएको चाही पक्का होइन । तेत्रा वस्तुको मल मैले यही खेतमा बिछ्याएको हँु । गतवर्ष यो भन्दा कम दास्तीले धान फलेर घरको ओडा पैरी चलाएकै हँु । के गर्ने ? यो वर्षको खडेरीले गर्नु सम्म गर्‍यो । बजिर सिंङले भन्यो तँलाई खडेरी लाग्यो मलाई के लाग्यो र ? मेरो अब धेरै बेर बस्ने फुर्सद छैन खुरुक्क धान भरिदे हुन्छ । रनेको शारिरीक कम्पन बढ्दै गयो । ओठ सुक्यो । ढवाङ पाथी लिएर उ धान भर्न बस्यो । राम ! दुन, तिन, चार ........ क्रमश तेह्र पुग्यो । रनेको आँखा रसाए उसले साहुको मुख तिर हेर्‍योे । बजिर सिंङको कठोर हृदय कहाँबाट पग्लन्थ्यो अनि उसले सिरको टोपी भुइमा राख्यो र भन्यो मेरो याहाँ भन्दा बढि उपाय छैन साहँु बा ! बजिरले भन्यो ल त्यो ढवाङ पाथी पनि घोप्टाइदे पराल पनि छोडी दे तेरो अब बाटो फुक्यो । रनेले गोरु फुकाईदियो । खेतलालाई विदा दियो अनि बर्र आँसु झार्दै सेती र धने काखमा बच्चा लिएर आफ्नो घरतिर लागे । 
+
+	दिन वित्न कत्ति बेर लाग्दोनरहेछ आज भुन्टी ५ कक्षामा पुगीसकी घरको धन्दा र मेलापात हिड्न सक्ने भइसकी । भइ शंकर पनि ९ वर्षको भयो । घरको धन्दा र टहलले भुन्टीले राम्रो सँग पढ्न पाइन । उ पनि अहिले १४ वर्षको भइसकी । घरको हरेक काम उसैले भ्याउछे । त्यसैले पढाइमा त्यति दिलचस्वी दिन सकिन । हिस्सि परेको अनुहार, खाइलाग्दो जिउ, देख्दा उ तरुणी देखीन्छे । छिमेकीहरुका कुरा पनि कत्ति सुन्नु, रने र सेतीले एक दिन पिपल बोटे जेठीले सेतीको सामु भनी छोरी बढाएर तिघ्रे बनाएर राखेका छौं दिन सक्दैनौ र एउटा केटो खोजेर ? सेतीले भनी के गर्नु दिदी मैले त बार-बार भुन्टीका बाउलाई भनेको छु । अब त यता उता कुरा चलाउनु पर्छ भनेर । दिन त कहाँ धेरै भा छ र चौध पुरा भै अहिले कात्र्तिकले । खै दिना लगन आए पछि विहे होलानी त दिदी जेठीले भनी । त्यसो त हो तर बेलैमा सुझवुझ गर्नुपर्छ । छोरी बढेपछि विहे गर्न गाह्रो पर्छ । त्यो त ठीक हो जस्तो पायो त्यस्तै ठाउँमा मिल्काउन भएन । भोलि छोरीले दुःख पाई भने सेतीले भनी । जे भए पनि बेलैमा सोच विचार गर भन्दै जेठी आफ्नो बाटो लागी । सेती पनि आफ्नो बाटो लागि अनि बाटोमा अनेक कुरा खेले भरे बुढालाई नसम्झाई भएन । हरे ! गाउँलेले आज कुरा काँट्न थाले भन्दै मनको गन्थन गर्दै सेती घर पुगी । 
+
+
+	बेलुकाको खाना खाइसकेर घरको धन्दा चुलो चौका पनि सकियो । भुन्टी र शंकर पनि निदाए पिढीमा सेती र रनेको गन्थन शुरु भयो । ए ! भुन्टीका बा आज पिपल बोटे जेठीले छोरी तिघ्रे भई सकी एउटा केटो खोजेर दिन सक्दैनौ भनेर भनिन् । मलाई त पिर लागेर आयो दिन नखाए पनि हलक्क बढेकी छे । भोली दुनीयाले बुढि कन्या भन्नेछन् अनि के गर्ने ? जसो तसो गरेर एउटा केटो खोजेर दिउला नी ! हतारमा विहे गर्नु फुर्सदमा पछुताउनु भएन नी रनेले जवाफ दियो ।
+
+दुनियाले कुरा काट्न थाली सके एउटी छोरीलाई पनि विहे गरेर दिन नसके के बाबु भनेर नाक देखाउनु । यसरी ढुक्क भएर बस्नु हुन्छ ? मौका आउँछ पर्खदैन, बगेको खोला फर्कदैन भन्ने उखानै छ । यसरी निदाएर पनि हुन्छ ? भोली नै चाहारीमा हिड्नु पर्‍यो , म दौरा सुरुवाल धोई दिन्छु मास्तिर रामेलाई लिएर यसो घुम्दै हिड्नु होस् । अर्काको घरमा जाने जात एक पटक दिनु परिहाल्छ । किन बोझ बोकिरहने । समय झन कठोर बन्दै गएको छ । छि ः विहे गर्न पनि कति गाह्रो । ठूला घरे मैयाको विहे गर्दा लाख रुपियाँ लाग्यो रे ? एउटा असल ज्वाई का हातमा सुम्पन पाए मर्ने बेलामा पनि राम्ररी सास जाने थियो । जस्तो पायो त्यस्तो ठाउँमा मिल्काउनु भएन सुझवुझ गर्नुपर्‍यो । छोरीको घर अगतिलो परे घर खान गाह्रो पर्छ । 
+</p>
+       <div class="page-number">Page 13</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-11">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-13">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-13" aria-label="Chapter 13">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र १३</p>
+       <h2>तेह्रौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>
+भुन्टी विद्यालयमा भुन्टी थिइन । सरहरुले उसको नाम राममाया राखिदिएका थिए । जवानी भैसकेकी राममाया घरको चुलो चौका अनि कहिले विद्यालयबाट छुट्टि लिएर मेलापात गर्थी। उसलाई पढाइमा राम्रो दिल बसेन । सानोमा प्रथम, द्धितीय हुने राममाया आज उसलाई पास मात्र हुन धौ धौ पर्‍यो । यी सारा घरायसी समस्या थिए । त्यसैले उ छ कक्षामा फेल भई । समय पाएको भए सायद उसले उन्नति गर्थी होली । सानो छँदा भाईलाई रेखदेख गर्दैमा समय बित्यो । ठूलो भएपछि मेलापात उसको छरितो र छिटो कामले गर्दा उसलाई छिमेकलीहरु पर्म लगाउन बोलाउने गर्छन् । जे काम पनि उसलाई सिकाउनु पर्दैन । फेल भएका कारण आफुभन्दा साना सँग बसेर पढ्न उसलाई अब उमेरले नदिएको महसुस गरी आफ्नो पढाईलाई छोडी उ अब आफु ठूली भएको कारण विद्यालय जान उसलाई संकोच लाग्न थाल्यो । सँगैका साथीहरुले उछिनेर ९, १० कक्षा पुग्नु र आफु कक्षामा फेल हुनुले संकोच लाग्नु स्वभाविकै थियो । अब उ पढाई छाडेर घर धन्दामा लाग्छे । 
+
+ छोरीले न पढ्न सकी न विहे गरेर दिन सकीयो भन्ने पिरालो सेतीलाई छ । संगैका दौतरीले यो वर्ष एस.एल.सी दिए । पढ्न पाए उसले पनि उन्नती गर्थो होली भन्ने कुरा सेतीको मनमा छ । छोरी राममायाकै पिरले उसलाई दिन प्रतिदिन खग्रास पारेको छ । त्यसको कारण उ सधै रनेलाई घचघचच्याइ रहन्छे ।
+
+राममाया अब त १५ वर्ष पुगि सकी सरलक्क परेका हात गोडा, पुष्ट शरीर बोलीमा मिठासका कारण उसमाथि गिद्दे नजर लगाउने पनि कम थिएनन् । गाउँमा जब हिउँद आउँछ कोही फुलका डोली लैजाने कोही सत्य नारायणको पुजा त कतै माघ माहात्म्य को साङ्गे गाउँभरी छ । त्यसै क्रममा घरमाथि द्यौवाको घरमा पनि आज नारायणको पुजा छ घरमा आमा सँग अनुमति लिएर संगीहरु सँग उ हिडी । उसलाई जुहारी पनि असाध्यै आउँछ । सबै केटा केटी तन्नेरीहरु नाचगानमा मस्त छन एकातिर संगीहरुको स्वरमा स्वर राममायाले पनि मिसाई । प्रति उत्तर फर्काउने क्रममा केटी पक्षको पालो आयो । राममायाले अड्को फुकाइदिई । फेरी रौनक थपियो केटाहरु झ्याउरेको तालमा हुर्रे गरी उफ्रिए । चुरोट तान्दै रने मण्डपको छेउमा बसिरहेको थियो । आफ्नी छोरीको कण्ठ बाट निस्किएको मधुर स्वरले उसको ध्यान आकर्षण त्यतै तिर गयो । 
+</p>
+       <div class="page-number">Page 14</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-12">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-14">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-14" aria-label="Chapter 14">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र १४</p>
+       <h2>चौधौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>प्रति उत्तरमा माया पिरतीका गहकिलो उत्तर दिएको सुन्दा रनेलाई अचम्म लाग्यो । अघि सम्म सानो देखेकी छोरी अहिले ठूली भई मनमा धेरै काउकुती लाग्यो । उसले त्यति खेर झट्ट आफ्नो जवानीलाई सम्झ्यो । अब सेतीको मात्र नभएर राममाया रनेको मनमा समेत चिन्ताको विषय बनी । यो हिउँद पनि गयोे भने त ......... खुइया सुस्केरा हाल्दै नारायणको प्रसाद खाएर ऊ घर तर्फ लाग्यो । मनमा कुरा खेले रातभरी जुहारीको गुनगुनले रनेलाई निन्द्रा लागेन । यसपाली पनि छोरीको विहे भएन भने के गर्ने । न माथि सम्म पढाउन सकियो, न विहे गरिदिन । उसलाई अत्यास लाग्यो । आफ्नी अप्सरा जस्ती छोरीलाई जहाँ पायो त्यहि मिल्काउन पनि त भएन आर्थिक समस्यामा जकडिएको मान्छे । भोली छोरीको विहे गर्ने कसरी हो । यो उसलाई दोस्रो चिन्ता छ ।
+
+छोरी जन्मेकै दिन देखि बाबु आमालाई बोझ महसुस हुन्छ रे त्यहाँ माथि सालिन्दा गाउँका छोरी बेटी राममायाका संगिहरुको विहे पनि धेरैको भयो । दाम्पत्य जीवनमा बाँधिएर श्रीमान सँग अघि-पछि लागेर संगीहरु हिड्न थाले । रने छोरीको विहे गर्छु भन्दा भन्दै छोरी तरुणी भै सकेको देख्दा अति खिन्न छ । तर घरको ढिकी जातो पानी पँधेरो, देखि लिएर मेला पात उसैले भ्याएकी छे । छोरी हुर्केपछि मेलापातको काममा सेतीले छुट्कारा पाएकी छ । दुनियाले भन्नु आफ्नो मर्नु भएको छ रनेलाई । संगैका संगीले माइतमा आउदा घुतुमुने छोरो लिएर आँउछन् । त्यो देख्दा राममायाको मनमा पनि कुरा खेल्दा हुन् । सेती जस्तै सरल स्वभाव उसमा छ । बाबु आमाले विहे सम्वन्धमा एकान्तमा बात गरेको उसले कहीले काँही उ सुन्छे । छोरी शुशील छे । नपढेका स्वाँठ केटाहरु विहेका प्रस्ताव राख्न आउँछन् । राममाया त्यसलाई नकारी दिन्छे । आफुले मात्र बल गरेर भएन आजकलका केटा केटीलाई के गर्ने । रने अब दिक्क भईसकेको छ । एक दिन बाटा मुनि माइलाले एउटा केटो लिएर आए केटो पनि खाइलाग्दो तर नपढेको । उनले रनेलाई एकान्तमा बोलाएर भने मैले कुरा राखेको छु के भन्छस् रने ? रनेले घरमा को को छन् भनेर सोध्यो केटाले उत्तर दियो बा आमा र एउटी बहिनी छन् म एउटा मात्र छोरा हुँ । जेथा कति छ त बाबु ? आफुले गरेर खाए प्रसस्त पुग्ने छ भन्ने उत्तर केटाबाट सुनियो । केटा दिल्लीको जागीरे पनि छ भन्छ । रने खुसी भयो । अनि रनेले भन्यो आजकलको जमना केटा केटीको मन्जुरी बिना कुरो छिनाफानो गर्नु भएन । हो ठूले हाम्रा पालामा ६,७ वर्षमा विहे गरि दिन्थे । जोइपोइ भनेको थाहा हुँदैनथ्यो । राममाया काग भन्दा बाठी कोइली थिई । उनीहरुका कुरा झ्यालमा बसेर सुनी रहेकी थिई । रनेले राममायालाई बोलायो ए राममाया ! राममाया ! नजिकै पुगी माइलाले कुराको प्रसङ्ग अघि बढाए र भने भन्न पर्‍यो तिमीहरु यतिका जवान भै सक्यौ । एक पटक छोरी भए पछि अर्काको घर जानै पर्छ । नगई सुखै छैन भन्न पर्‍यो केटो यही हो । घरको अवस्था पनि राम्रो छ । तिमी पनि नपढेको उ पनि नपढेको । मुग्लानको जागिर छ अब के कुरा भन्छेस् त रामाया ? माइलाको कुरा सुनेपछि राममायाको शरीर जिरीङ्ग भएर आयो । उसले नडराई सोधी के काम हो मुग्लानको ? दिल्लीमा नोकरी गर्नुहुन्छ । माइलाले जवाफ दिए । 
+
+	माइलाको जवाफ पछि रेडियो नजिकै बजिरहेको थियो, घुम्दै हिडँदा भारतमा नेपालीको कथा भेटियो भन्ने नारायण गोपालको गित प्रसारण भइरहेको सुनी । मनमनै राममायाले धेरै गमी त्यहाँ गोर्खालीहरुको दुःख सम्झी । बरु हलो जोत्ने सँग विहे गर्नु बेस -भन्ठानी) भन्ने ठानी उसले त्यो प्रस्तावलाई ठाडै अस्वीकार गरिदिई र भनि मेरो विहे गर्ने इच्छा छैन ।
+</p>
+       <div class="page-number">Page 15</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-13">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-15">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-15" aria-label="Chapter 15">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र १५</p>
+       <h2>पन्ध्रौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>माइलाले धेरै सम्झाए र भने बाबु आमालाई धेरै पिर नबना नानी यस्तो मौका फेरी आउँदैन । भोलि तँलाई पनि उतै लान्छ दुःख गर्नु पर्दैन । भन्दै माइलाले सम्झाए नि राममायाको सहमति नआए पछि कुराको बिट त्यहि मारियो । केटा र बाटामुनि माइला ओरालो लागे । रने आँगनमा धेरै बेर झोक्राइ रह्यो । यसपाली पनि छोरीको विहे भएन भन्ने पिरालोले उसलाई सताई रह्यो । उ उठ्न मात्र के लागेको थियो, मुखीया बा आँगनमा टुप्लुक्क आइपुगे । उनले सोधे । छोरीको लागि मैले एउटा राम्रो कुटुम्ब पठाइदिएको थिए नि सिरुवारीको के भो ? के हुनु नी मुखिया बा छोरीेले मानिन् । उ त्यहि पुगेका छन बाटा लागेर । छोरीको जातले कहिल्यै विहे गरौ भन्दैन क्या वुझिस् ? रनेले मुखिया बालाई जवाफ दियो, मुखीया बा ! यो पहिलेको जस्तो जमाना छैन । वर रोज्ने अधिकार उनीहरुकै हो । भोलि दुख पाए भने तिमीहरुले गर्दा यो गत भयो भन्न आउँछन् । त्यसैले त्यसको जिम्मा उनीहरुलाई नै दिनु पर्छ । मन नपरीकन विहे गरिदियो भने घरबार विग्रन सक्छ । मुखिया बाले भने तेरो कुरा पनि ठिकै हो रने । मलाई मनासिब लाग्यो । अलि राम्रो कुटुम्ब हेरेर विहे गर्नु पर्छ । नआत्तिई ! दिना लगन आउनु पर्छ । देखेको हुँदैन लेखेको हुन्छ । अलि राम्रो ठाउँ आयो भने पछि हट्नु ह्ँदैन । परेको बेला म छँदैछु । तँ धैर्य गर रने !
+
+	साथमा श्रीमानसँग अघि-पछि लाग्दै साथमा सानो बच्चा लिएर दशैंको टिकाको दिन माइतमा आउने संगीहरु देख्दा राममायालाई अलिकति लाज जागेर आउँछ । आँफु भन्दा सानाको विहे भै सक्यो र बच्चा पनि भै सक्दा सम्म आफ्नो चाहि विहे भएको छैन । संगीहरुले एकान्तमा जिस्कयाउँछन् । नकरा मोरी भन्दै उ ती वैवाहिक जीवन तथा दाम्पत्य जीवनका कुराहरु मोडेर कुराको प्रसड्ढलाई अन्तै तिर मोड्छे । उ जीवनको सुखद सपना बुन्छे । ति सपनाहरु अधुरो भएर रहन्छ । जवानी झन-झन चड्दै गयो । घरको अवस्था दयनीय छ । पूँजीवादी संस्कारमा हुर्केको समाज भोली आफ्नो विहे क्यै गरी हुने भयो भने त्यसको तार-तम्य कसरी मिलाउने भन्ने चिन्ता पनि उसलाई छ । भोली चन्दने खेत डिग नराखी सुखै छैन । जाउलो खाने खेत त्यही माथि पनि डिग राख्न पर्‍यो भने ? उता मान्छे समय र परिस्थितिको दास परि आए ऐया भनेर पनि सुख छैन । जो समस्या आउँछ त्यस सँग जुध्नै पर्ने समय अनुसार चल्न नसके सामाजिक रुपमा तिरस्कार, यी सारा कुराले राममाया पनि भित्र भित्रै जलिरहेकी छ । उता बाबु आमालाई पनि पिरलो । एउटी छोरी पनि रनेले विहे गरिदिन सकेन भन्ने कुरा गाउँ भरी हल्ला छ मेला पातमा पनि संगैका संगिनीहरु जिस्क्याउँछन तर के गर्नु ? दुनियाले भन्नु आफ्नो मर्नु भने जस्तो भएको छ राममायालाई । सफा हृदय भएकी राममाया उसको जवानी देखेर अल्लारे केटाहरु पछि लागेर हैरान पार्छन । उ जवानीको क्षणिक काम वासना भन्दा भोली हुने परिणाम प्रति अत्यन्त सजग छे । आज सम्म उसको खिल्लि उडाउन कसैले सकेका छैनन् । उ दाम्पत्य जीवनमा सुन्दर र सुखी संसारको परिकल्पना गर्छे ।
+</p>
+       <div class="page-number">Page 16</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-14">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-16">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-16" aria-label="Chapter 16">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र १६</p>
+       <h2>सोह्रौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>उता जति केटा आएपनि स्वीकार नगरी दिए पछि रनेको पनि केही लगेन । जमाना बदलिएको छ । उहिलेका कुरा खुइले । जबर्जस्ती छोरीको विहे गरीदिन पनि भएन वर रोज्ने अधिकार वा आफ्नो भाग्यको फैसला रनेले छोरीलाई नै सुम्पिएको छ । जबर्जस्ति गरेर भोली छोरीले घर खाइन भने सम्पूर्ण दोष आफ्नो टाउकामा थुपारिन्छ भन्ने मानसिकता रनेलाई छ । "आफ्नी अप्सरा जस्ती छोरीलाई असल ज्वाईका हातमा सुम्पेर मर्न पाए सजिलै सास जान्थ्यो, उ भन्छ" । हातमा नाती खेलाउने बेला सम्म पनि छोरीको विहे नहँुदा चिन्ताले न रातमा निद छ, न दिनमा भोक, रनेलाई । गाउँका अल्लारे केटाहरुमा धर्मसाहुको छोरो नन्दे सधै रने कहाँ आउँछ । राममायाको जवानी देखेर उ आशक्त हुन्छ । राममायालाई पगाल्न खोज्छ । छि नन्दे दाई क्या मातेको भन्दै उ पर सर्छे । उ राममायालाई एकान्तमा भेट्न निम्तो दिन्छ तर राममाया वास्ता गर्दिन । कहिले बाटो छेकीदिन्छ । उ नन्देलाई दाजुको रुपमा नै हेरी रहन्छे । तर साहुको छोरो घरमा सानैमा विहे गरिदिए । बच्चा पनि भै सक्यो तर उ राममायाको शरीरमा गिद्धे नजर लगाउँछ । एक दिने रने वन तिरबाट काठको मुढो बोकेर रिमरिमे सांझमा घर तिर आइरहेको थियो । राममाया पानी लिन पँधेरातिर हतार-हतार गर्दै ओरालो लागी । नन्दे पछि पछि थियो । हिउँदको समय पानीको दुःख के गर्ने ? सिरान गाउँका महिलाहरुको आधि जीउ भएको छ पानीको समस्याले । जव नजिकै बाबु छोरीको भेट भयो उ पछाडी फर्केर हेरी निली भई । नन्दे केही हच्क्यो । रनले छोरीलाई गाली गर्दै भन्यो । पानी लिन किन ढिला गरेकी ? मेलाबाट आउँदा यसबेला भो । गाग्रोमा एक थोपा पानी रहनेछ । त्यसो भएर । अनि नन्देलाई सोध्यो कता ? तल्ला बारी तिर । पटक-पटक छोरीको अघि पछि लागेको देखेपछि उसको मन मस्तिष्कमा शंकाको बादल मढारीयो । मन अमिलो भएर आयो । साँझ परेर झयाउँकीरी बास्दा गएकी छोरी यतिका समय सम्म नआउँदा दिक्क लाग्यो । "प्रतिक्षाको समय लामो हुन्छ । " उसलाई आधा घण्टाको समय दुई घण्टा जस्तो लाग्यो । छोरो शंकर पढिरहेको थियो । जा दिदीलाई लिएर आइज । झ्याम्झुम् रात परिसक्यो अझ आइन । कुरा गर्दा गर्दै राममाया घरमा टुपलुक्क आइपुगी रनेलाई रिस उठ्यो । छोरीलाई हतपत केही भन्न सकेन । यदि बुद्धि बिग्रेर कुलतमा लागि भने के गर्ने ? बारबार नन्दे रनेको घरमा आइरहन्छ । साहुको छोरो "मुर्खको अगाडी दैब डरा " ! चुपचाप उसले केही भन्न सक्दैन बयस्क भइसकेकी छोरीलाई उ केही भन्न सक्दैन पसल र मेलापातमा मानिसहरु आफ्नै प्रसङ्गमा गलल्ल हाँस्छन् । रनेको मनमा च्वास्स काँडाले घोचे झै हुन्छ । कतै मेरै कुरा त काटेका होइनन् ? शंकाको सागरमा उ पौडीरहन्छ । उसको मनमा नन्दे एउटा काँडा बनेको छ । माघ महिनाको समय थियो । राममाया गुन्द्रीको तानमा बसेकी थिई। फुलपिङ कट्टिबाट गुमानेको छोरा श्रीराम राममायालाइै प्रस्ताव राख्न आयो । मध्यस्तका रुपमा बाटा मुनि माइला नै थिए । रने आँगनमा बसेर चोयाको डोको बुनिरहेको थियो । नेपाली सेनमा कार्यरत श्रीराम हेर्दा निकै खाइलाग्दो थियो । आँगनमा पुग्ने बित्तिक्कै रनेले डोको बुन्ने काम रोक्यो । आँगनमा गुन्द्री बुन्ने काममा आमा छोरीको ताल एकनास सँग चलिरह्यो । बुट्टे चोली र लुंगीमा राममाया चिटीक्क परेकी थिई उसको हेराई एकतमास गुन्द्री बुन्ने काममा केन्द्रीत थियो । उसले आमालाई भनि आमा ! भरे त यो सकेर अर्को तान लगाउनु पर्छ , गुन्द्रीको तान अलि पर थियो । राममाया हतार हतार घर तिर आई अंखोरा सफा गरि अनि गाग्रीको चिसो पानी अगाडी राखिदिई । फरक्क फर्केर फेरी गुन्द्रीको तानमा बसि । उसको दिमागमा गुन्द्रीको तान जसरी तसरी चाँडै सक्नु छ अनि आजै अर्को तान लगाउने सोचमा छ । श्रीराम पर बाट एक तमास राममायालाई हेरीरहेको छ । उसको पुष्ठ शरीर र मेसिन जस्तै हातहरु निरन्तर चलिरहेका थिए । यता कुराको प्रसङग अगाडी बढ्यो । रनेले सम्पुर्ण कुराको जिम्मा छोरीलाई सुम्पिदै भन्यो तिम्रो पनि छोरी हो उसैलाई सोध । बाटा मुनि माइलाले राममायालाई बोलायो राममाया ....... ! राममाया ! एता आइज त । राममाया गुन्द्रीको तान छोडेर अगाडि आई, माइलाले भने अब तँ ठूली भै सकिस् आजकलका केटा केटीलाई नसोधी काम कुरा गर्न भएन कुरा के भने मैले यी बाबुलाई लिएर आएको छु उनी नेपाली पल्टनमा काम गर्छन । घरको अवस्था राम्रो छ, चिन्ता लिनु पर्दैन । एक पटक छोरीको जात भएपछि अर्काको घरमा जानै पर्छ, भन् तेरो के विचार छ ? राममायाको मुटुको घड्कन छिटोछिटो चल्न थाल्यो ऊ पर्खालमा आडेसा लगाएर उभ्भिएकी छे । मनमा आगोको ज्वाला दन्कन लाग्यो, के गरौ, कसो गरौं झै भयो । तिर्खा लागे झै भयो । अब के भन्ने होला ? ऊ संकटमा परी । उसले बल्ल आज बाबुको ठूलो मर्यादा राखी र भनी यसको संपूर्ण जिम्मा बाबालाई नै दिन्छु । रनेको चेहरा खुसीले लाल भयो । उसले आज बल्ल सन्तोषको स्वास फेर्‍यो । सेतीलाई बोलाइयो सेती तानबाट उठेर अगाडी बढी केटा केटी विहे गर्न मन्जुरी भए । सेतीलाई भनेर पण्डीत जयरामलाई लिन पठाए । सेती जयराम कहाँ पुगी र भनी पण्डित बा छोरीको विहे गर्ने कुरा छ, कहिले लगन जुर्छ पात्रो हेर्न पर्‍यो । पण्डित बा पात्रो लिएर झटपट गरी रनेको घरमा आए र भने केटा केटीको मन्जुर भयो ? माइलाले जवाफ दिए, सब कुरा ठीक भैसक्यो अब लगन कहिले जुर्छ तपाईलाई लिन पठाएको पण्डित बाले पात्रो हेरे भने माइला बाबु लगन त फागुनको १४ गते राम्रो छ । लौ हुन्छन्, धेरै दिनको खेवा किन चाइयो । त्यहि दिन पारौ हुन्न रने ? हुन्छ त म के भनौं । 
+</p>
+       <div class="page-number">Page 17</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-15">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-17">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-17" aria-label="Chapter 17">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र १७</p>
+       <h2>सत्रौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>
+	पण्डित बाले भने ल त्यसो भए चन्दन अक्षता बनाऊ सेती झटपट भित्र पसी । राममाया घोसे मुन्टो लगाएर पश्चिम पट्टी फर्केर बसी रही । सेतीले एकछिन पछि थालीमा अक्षता, दियो, कलश तयार पारी , केटा केटी दुवैलाई पुजा गर्न लगाईयो फागुन १४ गतेलाई विहे छिनियो । त्यहाँबाट श्रीराम विदावादी भएर हिड्दै थियो, राममायाले एक नजर केटा तिर फर्केर हेरी उसलाई मनमा कता कता काउकुती लागेर आयो । पेट भतभत पोल्न थाल्यो । 
+
+	जम्मा ७ दिनको खेवा छ कसरी राममायालाई विदाई गरी पठाउने कमाइको बाटो केही छैन । बाबुको जेथोमेथो भन्नु नै एक मात्र चन्दने खेत आखिर डिग (बन्धकी) नराखी सुखै छैन । आजकल मानिसहरु भोग अथवा डिगमा जग्गा खान मान्दैनन् । अब यो विपुज्वाला कसरी टारुँ भन्दै रने शोक मग्न छ । यसमा फेरी इज्जतको सवाल गाँसिएको छ । फेरी जोरीपारी हास्लान् के गर्ने ? उसको सम्पूर्ण शरीर भयले कम्पीत छ । संस्कार यस्तै छ दाईजो दिन नसके भोली पराई घरमा हेला र तिरस्कार सहेर छोरीले बस्नु पर्ने अवस्था आउन सक्छ । छोरीको घरबार बिग्रन सक्छ भन्दै रने आदी चिन्तमा डुबिरहेको छ ।
+
+चौध गते पनि आई पुग्यो नाकेडाँडामा झ्याई-झ्याई पञ्चै बाजा बजे । दुलहीको घर आज पाउनाहरुले खचाखच छ । तोरणले घर सजिएको छ । कोही भतेर पकाउनमा ब्यस्त छन् , आँगनको बिचमा मन्डप तयार गएिरको छ । रामामाया भाग्यमानि रहिछे , राम्रो कुल कुटुम्ब र जागिरे केटो फेला पर्‍यो भन्नेको गुनगुन सुनिन्छ । राममाया अब स्वयम्वरका लागि श्रीङ्गार कोठामा सजिन लागेकी छे । गाउँ घरका दिदी बहिनीहरु उसलाई सिंगार्न ब्यस्त छन् । घरतिर जन्तीको लस्कार बढि रहँदा कर्नाल र नरसिंगा बाजाको धुन एकोहोरो बढी सुनिन्छ । जन्ती आगँनमा भेला भए । राममायाको मन कता कता भय र त्रासले ढुक ढुक गरिरह्यो । स्वयम्वरको बेला भयो राममायाले दुबोको माला दुलाहाको गलामा पहिराईदिई । साँझ पर्‍यो । भतेर खाएर सबै नाचगान गर्न थाले । भोली पल्ट सूर्योदय सँगै राममायाको सिउँदो सिन्दुरले दुलहाको हातबाट रंगियो अनि गलामा पाते पनि सजियो दुलही अन्माउने समय भयो । शंकरले हात समातेर तिन पल्ट जग्गिया घुमायो । दिदीलाई बिदाई दियो । राममायाको मनमा झन बढी भक्कानो छुटेर आयो । उसले आ-आफ्ना आँखाबाट आशु खसाली अनि उसलाई प्रतित भयो की ऊ अब मरुध्यानको यात्रा तर्फ जान लागिरहेकी छे । जब उसको बिदाई भयो । उसका संगीहरुको आँखा ओभानो रहन सकेनन् । साँच्चि उसका गुनहरु प्रत्येकका मानष्पटलमा प्रवल भएर आए । राममायाको घर आज सन्नाटा छायो । रने शंकर र सेतीले एक अर्कालाई हेरीरहे गहभरी अाँशु लिएर । बिस्तारै-बिस्तरै बाजाको स्वर हराउँदै गयो । पाउनाहरु पनि बिदावादी भए ।
+
+</p>
+       <div class="page-number">Page 18</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-16">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-18">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-18" aria-label="Chapter 18">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र १८</p>
+       <h2>अठारौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>राममायाको विहेपछि सम्पूर्ण घरको धन्दा र मेलापात सेतीको थाप्लोमा आइपर्‍यो । पैसट्ठी वटा वसन्त सेतीले पार गरिसकेकी छ । केश सेताम्य भएर फुलेको छ । चाउरी परेका गाला किराले खाएका दाँतले सेतीको शारिरीक जीऊ डालमा धेरै परिर्वतन आएको छ । अाँखामा मोतिया विन्दुले दृश्यशक्ति कमजोर भएको छ । उसलाई ऐना हेर्दा साँची बुढी भए झै लाग्थ्यो । विहान खाना पकाउ आफै, बनको सोतेर ल्याउ, आफै वस्तुको टहल , आफै दिउँसोको मेलापात आफै जस्को कारण कामको लुछेटोमा सेतीको जीऊ आधिमासु भएको थियो । तै पनि काममा उत्तीकै फुर्ति छ । अन्न पानीको शरीर, बुढ्यौलीको पयो, वैशाख जेठको चर्को घाम, सेती ओछ्यानामा धेरै दिन देखि थलिएकी छ । 
+
+	रातको ठिक बाह्र बज्यो, रात रोइरहेको थियो , समीर हुण्डरी मार्दै सुसाई रहेको थियो । दियालोको मधुर प्रकाशले कोठा उजेलीएको थियो । सेतीको टाउको शंकरको काखमा थियो , गोडातिर रने बसेको थियो । सेती विरामी भएदेखी रने कयौ दिन देखी सुतेको थिएन । उ ऐया ! ऐया गर्थी तर त्यस दिन उसको स्वास गलामा अड्केको थियो । स्थानिया डाक्टर, वैद्य , धामी सबै लगाइयो । डाक्टरको औषधी र धामी झाँक्रीको टुना मुनाले पनि छोएन । सेतीको निधारमा चन्द«कार टिका जगमग थियो । तुलसीको जल पलपल रनेले सेतीको मुखमा राखिदियो । 
+
+सेतीले तिनपटक हिक्क ! हिक्क ! हिक्क गरी अनी आफ्नो प्राण वायुलाई हुत्याइदिई । अनि रनेको मुखबाट निस्क्यो , हरि ! हरि ! हरि शरणम ! त्यस घरमा रोदन शुरु भयो । गाउँघरका सबै भेला भए रने छाती पिटी पिटीरुन लाग्यो मेरी आमा .......... । तिमी मेलाई छोडेर किन गयौ ? हस्तेले रनेलाई सम्झाउँदै भन्यो भाइ रने, यो मनुस्याको चोला यस्तै हो । एक दिन जन्म अनी एक दिन मरण" । "दैवको लिला टारी नसक्नु छ । " यो विधीको विधान हो " सेती भाउजु भाग्यमानी रहीछन् । रोगले थलिएर यस संसारमा घृणित भएर बाँच्नु भन्दा हातगोडा छदैमा स्वर्गे हुनु भाग्य हो । यो जीवनका दुई किनारा छन् । जन्म अनि मृत्यु । त्यसैले नरोउ भाई । रुदै रनेले भन्यो " के गर्छस ठुले मैले गर्न सक्ने धर्म डाक्टर वैद्य, धामी झाँक्री सबै लगाएँ । आखिर मैले यो दशा भोग्नु पर्‍यो हस्तेले एउटा शिलक गायो । सबै भन्छन् देखेको होइन लेखेको हुन्छ त्यहाँ । यो दुखको सागर तरी भोली त जानु छ कहाँ । "त्यसले जसले जे भाग्यमा लिएर आएको छ । त्यो भोग्नै पर्छ" मानु सकिए पछि कसैको केही लाग्दैन रने"
+
+	रनेको मन केही समय शान्त भयो शिरको टोपि झिक्यो र भन्यो "सेती मेरी आमा हो ठुले । "घरकी लक्ष्मी हो" यो घरको अब बत्ति निभ्यो भन्दै फेरी रुन्छ । " हस्ते फेरी सम्झाउँछ र भन्छ । हेर रने, "मानिस भएर जन्मे पछि जीवनमा जे आइपर्छ त्यो सहनै पर्छ । " यस्तो बज्र प्रहार तँलाइ मात्र होइन सबैलाई पर्छ । मेरो पनि त बुढिले छोडेर गई । तैले देखेकै छस् । नरोेउ भाई भन्दै हस्तेले रनेको आँसु पुछिदिन्छ । भोलिपल्ट सेतीको शव माथि लावा अविर र मालाले सजाइयो । मरणघाट सम्म पुग्न रनेका गोडा लागेनन् । गाउँघर का दाजुभाई सबैले एकोहोरो शंखध्वनीका साथ सेतीको शवलाई मरणघाटमा पु¥याईयो अनि दागवत्ती दिईयो । चिता हर्रहर्र बल्न थाल्यो । धुवा गन्धकाम्ल बोकेर पर आकाशको बादलमा मिसीन पुग्यो । 
+</p>
+       <div class="page-number">Page 19</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-17">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-19">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-19" aria-label="Chapter 19">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र १९</p>
+       <h2>उन्नाइसौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>
+रनेको शरीर पनि बिस्तारै बुढ्यौलीको पयो लाग्दै गयो । केश पनि सेताम्य भएर फुल्यो । तर मानवले बुढो भएको महशुस गर्दैन भित्र भित्र अमिलीएको मन र कोठरी भित्रको शरीर जसरी छटपटिन्छ । त्यसरी नै दुखियाको मन दुखिरहन्छ , पोलिरहन्छ । छातिलाई दुवै हातले थिच्दै उ दौडन्छ । के पाओस् उसले केवल खाली हात र फोस्रो मायाँ । मनोरथको सैर वालुवाको महल कहाँ पूर्ण होस ? सपना ,सपना भएर रहीरहन्छ । विपना उही आशाको त्यान्द्रो मात्र ।
+
+आँखाले हेर्दा सिरान गाउँ विरानो गाउँ भयो । चन्दे्र र धनेको घरमात्र बाँकी रहयो । पहिले प्रसस्त उब्जाउ हुने बारीका पाटाहरु हरियो घाँसले टम्म ढाक्यो । चन्द्रे र रनेले सक्दो अधियाँमा कमाई गरे । कसैका बारी पाटाहरु बाँझै रहे । कहँी तितेपाती फुल्यो । कसैले खरवारी बनाए । कोही मानिसहरु वर्षको एकपटक खर काट्न आउथे, कोही घाँस काट्न आउथे किनकी मानिसहरु कोही गाउँ छोडेर विस्तारै बेँसीमा झरेत कोही मधेश लागे । त्यो हिडीरहने गाउँवँेसीको उकालो मानिसहरुलाई लामो भयो । मान्छेहरु सुखी भए । त्यहाँ तित्राहरु बास्थे , ढुकुर कुर्लन्थे । घरहरुका भग्नावसेसहरु वर्षाको पानीले भत्कीदै गए । जसको विभत्स दृश्यले आँखामा ठुङ मार्न आइपुग्थे ।
+
+वर्षेनी सधैको तिहारमा चेलीवेटीहरु आफ्ना दाजुभाईको दिर्घायुको कामना गर्न र टिका लगाउन माईत आउछन् । दिनहरु बित्दै गए । एक वर्षपछि भुन्टी (राममाया) भाइलाई टिका लगाउन सिरान गाउँ आई । सबै जसो घरहरु भत्किएका र गाह्रो मात्र ठडिएको देख्दा उ खिन्न भई । पिठ्युमा छोरो बोकेर राममाया आइरहेकी थिई । चन्दे्रको फुपु घरबाट बाहिर निस्कीन् र भनिन् लौ हेर ! अस्ति भर्खर विहे गरेर अन्माएर पठाएको यत्रो घुतुमुने छोरो पाएर ल्याइछ मोरीले । राममाया लाजले भुतुक्क भई । उनकी छोरी मैना पनि पानीको गाग्रो काखीमा राखेर आएर उ राममाया तिर दौडी अनि भुन्टिको काखबाट बच्चा खोसेर हातमा लिदै खेलाउन थाली । राममायाले मैनालाई सोधी सन्चै ? कहिले आइस् मैना काठमाण्डौँबाट ? मैनाले उत्तर दिई हिजोमात्र । घरमा शंकर मात्र थियो । सुर्यास्त सँगै रनेले गाईबाख्रा लिएर आइपुग्यो । अनि राममायालाई सोध्यो सन्चै आइ पुगिस छोरी ? सन्चै छ बा ।घरमा खुशी नै खुशी छायो । रनेले सानो पोको कटुस थालमा राखिदियो । भुन्टि मैना फुपुले टोक्न थाले रनेले भन्यो, यो वर्ष बनमा असाध्यै कटुस फलेको छ । मैले यसो वस्तु चराउँदा टिपेको मात्र हुँ । त्यसो भए हामी भोली कटुस खोज्न जाने हुन्न सानिमा मैनाले राममायालाई सोधी । हुन्छ मैनाले भनि, फुपु तिमी म गएपछि के को डर सकिहालीन्छ नी राममायाले भनि । भोलिपल्ट जाने सल्लाहामा सबैले कुराको मेलो बङग्याए । भोलिपल्ट विहान उज्यालो भयो हाडीमा भुटेको मकै कुटुङ कुटुङ चपाउँदै फुपु मैना र राममाया पाले वनतिर लागे । पछि पछि शंकरपनि नाम्लो आँसी लिएर बाख्रालाई स्याउला काट्न वन लाग्यो । मैना राममायाँ र फुपु अघि अघि जादै थिए । खोलाको किनारको चिप्लेटी ढुङगामा मैना लड्न पुगी । हातका चुराहरु फुटे । कुहीनामा चोट लाग्यो । गोडा तिर पनि सारा लछार्‍यो । कुहीनाबाट रगतको धारा बहन लाग्यो । राममायाले -उसको) मैनाको हात समातेर तन्काइदिई र भनि भाँचिएको त छैन । अलि अलि मर्केको मात्र हो । ऐया गर्दै मैना घाउ सुम्सुम्याउन लागि । शंकर तलबाट आइरहेको थियो । फुपुले हातको इशाराले चिच्याइन् । शंकर दौडेर आयो । मैनाको गहभरि आँसु थियो । शंकरले सोध्यो के भो ? हेर नं ढंगले हिडे पो हुन्छ । अहिले हात मकाई फुपुले भनिन् । हेर्दाहेर्दै नशाहरु फुलेर आए । शंकरले खल्तीबाट रुमाल झिकेर हातमा बाँधिदियो । 
+
+	मैना विसौनी ढुङगामा आडेसा लगाएर बसिरही । राममाया र फुपु कटुस खोज्न वन पसे । शंकर पनि घाँस स्याउला काट्न वन पस्यो । घाँसको भारी बनाएर त्यही विसौनीमा विसायो । अनि मैनालई सोध्यो, अहिले कति दुखेको छ । ? भतभती पोलिरहेछ । अघि चोट लाग्दा त्यति दुखेको थिएन । घरमा गएर गाईको घ्यूले मालिस गरेपछि ठिक हुन्छ शंकरले भन्यो । तिमी शहरको रमझम अनि साइकलमा दौडेकी मान्छे यो भिर पाखासँग परिचित छैनौ त्यसो भएर किन हिड्न जान्नु शंकरले भन्यो मैना नाई हामी पनि यहि माटोमा जन्मेर हुर्केर खेलेको हो । एक दुई वर्ष बाहिर बस्यो भनेर हुन्छ र ? 
+
+	शंकर- त्यति खेर यी वन पाखाले चिनेका थिए र लडिनौ । मैनाको अनुहार लाजले लाल भयो अनि मुस्काउँदै मुन्टो फर्काई । शंकरले फेरी सोध्यो । अब कहिले जान्छ्यौ काठमाण्डौ तिर, मैनाले उत्तर दिई अब धनि पुर्ने -कार्तिक पुर्णीमा) तिर जान्छु । काठमाण्डौ आउनुभयो भनेँ यसो हाम्रो तिर पनि आउनुस् है दाई बस्न ! बरु पाखे आयो भनेर नभन्नु नि शंकरले भन्यो । 
+
+मैना- यो दाई पनि कस्तो कुरा गर्नुहुन्छ खाली कुरा मात्र बङ्ग्याउने । शंकरले घडि हेर्‍यो भन्यो, विहानको दश बज्न लागेछ हेर मैना ! फुपु र दिदीलाई बोलाउँ शंकरले सुइयाँ सिठ्ठी फुक्यो । उ ............ ! भन्दै कटुस घारी बिचवाट राममायाले चिच्याई । 
+
+	शंकरले भन्यो- छिटो आउ अब घर जाउँ ! एक छिनपछि दुबै हस्याङ फस्याङ गर्दै दौडदै आइपुगे । शंकरले भारी बोक्यो सबै ओरालो लागे । 
+
+	भाई टिकाको दिन पनि बित्यो । भोलि पल्ट चन्दे्रको फुपु र उनकी छोरी मैना घर जान निस्के । शंकरको घरमा विदा लिन आए । मामा -घरतिर) फर्केर मैनाले विदा मागी शंकर र मैनाले एकअर्कालाई हरीरहे । आँखा आँखा बोलिरहे । राममाया हतार हतार खाना खाई चिसो हात लिएर बाहिर निस्की । राममायाले मैनालाई सोधी अब कहिले आउँ्छौ त मैना ? अब अर्को चैते दशै सम्मा आइहालिन्छ की भन्दै आमा छोरी बाटो लागे ।
+</p>
+       <div class="page-number">Page 20</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-18">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-20">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-20" aria-label="Chapter 20">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र २०</p>
+       <h2>बीसौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p> मानव गृहस्थ बन्छ । पारिवारिक मायाको जालाले उसलाई गुटुमुटु पारेर बाँध्छ । उ त्यहि भित्रको दास बन्छ । अनि उ त्यसैको उन्नतिको चिन्तनमा डुब्छ । आज यति गरौ भोलि यति गरौ भन्दा भन्दै यो मायाको झोली विसाउनु पर्छ । "यो सृष्ट्रिको नियम" । 
+
+	राममाया घर जाने बेला भो । रनले केही कोशेली बनायो । छन पनि राममाया बाहेक अरु उसको को थियो र ? पर गहते खोला तारिदियो र भन्यो आउँदैै गर है बा !
+
+	राममाया विदा भएर गई । रनेको मनमा विदाइको बेला भक्कनो छुटेर आयो । मनलाई बाँध्यो । त्यही बेला सेती सँगै राममायालाई बोकेर ससुराली गएको सम्झना आयो जति रोए कराए पनि समस्या कहाँ सुल्झोस् ? परिसकेपछि कहाँ टर्छ र ? सेतीको सम्झनाले ब्युहल बनेर उसको मुखबाट निस्कयो । हे भवगान् ! यो पृथ्वीमा म मात्र किन एक्लो भएर बाँचु ? म पनि यो दुखको भारी विसाएर विश्राम लिन चाहान्छु । म किन जिउँदो लास भएर बाँचु ? उसको मनभित्रको आगो दन्किरह्यो । यस्ता तरङग तरेलीहरुको छालामा सैर गर्दै, मनोवेगका छालामा उ हुत्तिदै हुत्तिदै जान्थ्यो । मनका ज्वारभाटाहरु उर्लेर आउथ्यो । मस्तिष्कका भित्राहरुमा ठोकिएर मुटुतिर ओरालो लाग्दै जान्थे । चिन्ताले शारिरीक तापमान पनि बढ्दै जान्थ्यो । 
+
+	सेतीको निधनले रने दिन प्रतिदिन दुब्लाउँदै गयो । पाखा पखेरीमा गाई वस्तु चराएको हल-बल सहित हिउँद बर्षा खेती गरेका दिनहरु बिराना हँुदै गए । कारण बिस्तारै शरीरमा बुढ्यौलीको पयो लाग्दै गयो । केश सेताम्यै भएर फुल्यो । शारीरिक दुर्वलताले लौरो साथी बन्यो । आँगन परदेश भयो । हिजो यसो जाउलो पकाएर दिने सेतीले छोडेर गई अब एक मात्र सहारा छोरो शंकर छ । उसले पो के गरोस् मेला पात र गाउँ बेँसीमा जीवन बितेको छ । अब रनेलाई जीवन देखी दिक्क लाग्न थालेको छ । दम र खोकीले रातभर निन्द्रा लाग्दैन । जो कोही नजिक आउँदा केही दिन्छ की भन्ने आश मनमा जाग्छ । ऊ थलिएको पनि धेरै दिन भैसक्यो अब त मनमा बाँच्ने इच्छा पनि छैन । उसको मुखबाट निस्कन्छ, सबैलाई काल आउँछ मलाई आउँदैन । रनेको दिन चर्या केवल खोपिमा मात्र बित्ने गरेको छ । 
+
+	भित्र खोपिमा खङ्खङ् खोकेको आवाज सुनिन्छ । लाल बिरेकी छोरी रमाले बाहिरबाट बोलाई ठुला बा, ठुला बा ! रनेले भित्रबाट सोध्यो ! को हो बा ? शंकर दाई एस.एल.सी पास हुनु भएछ रमाले भनी । तिम्रो मुखमा गाईको दुध र भात जाओस् । यो मर्ने बेलामा बहुत् शुभकुरा सुनायौ नानी परमेश्वरलाई धन्यवाद !
+</p>
+       <div class="page-number">Page 21</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-19">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-21">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-21" aria-label="Chapter 21">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र २१</p>
+       <h2>एक्काइसौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>जीवन फुल हो । कोपिला फक्रन्छ , चाउरी पर्छ र झर्छ त्यस्तै जीवन शैशव, यौवन र वृद्धा अवस्था बाट गुज्रन्छ । यर्थाथ जीवन खेल हो । हामी खेलाडी जहाँ खेल खेल्दा खेल्दै मानव जीवन देखी हार खान्छ । जीवन माटोमा जन्म्यो ,हुक्र्यो र माटोमा फुल्यो । डुब्न लागेको घाम अस्ताउन कती बेर ? पाकेको फल र्झन कती बेर ? आज शिरान गाउँ शोक मग्न छ । कारण रनेले आफ्नो इहलिला समाप्त गरेको छ । 
+
+	"मान्छे सामाजिक परिस्थिीतीको दास हो" सामाजिक संस्कारमा चल्न नसके उ समाजबाट तिरस्कृत हुन्छ । यो बाध्यता हो । यो बाध्यताले मान्छे दिन परदिन कङगाल हँुदै जान्छ । 
+
+	आफ्नो संस्कार अनुसार शंकरले ऋणको कुम्लो बोकेर भएपनि बाबुको काजक्रिया सक्यो । गैरी खेतका आशले सबै शंकरलाई पैसा दिन बाबुको क्रियामा आउँथे । बाबुको काज क्रिया र बाबुले छोडेर गएको ऋण समेत गरी २०,००० खर्च भएछ । साहुजीहरु अब खेत हत्याउने मौकामा थिए । त्यसमा सबैको होडबाजी जस्तै चल्यो । बाबुका क्रिया पछि जिम्माल कान्छा शंकरको घरमा आए अनि शंकरलाई भने । बाबु तेरो धेरैसँग बाँकी भइसक्यो । सबैले भन्ने गर्छन् ऋण घिन हो भनेर । यसमा कुरा तैले पनि बुझेकै छस् । फोहोर धेरै लिएर बसीराख्नु राम्रो होइन । अब जग्गा त मैले नै बन्धकमा लिएको छु । तेरो तिर्ने उपायाहरु के नै पो छ र ? त्यही जेथो नबेची सुख छैन । अब यो ऋणबाट फुक्का हुने कोशिस् गर बाबु भोलि गाह्रो साह्रो पर्दा फेरी सबैले पत्याउँने हुनुपर्छ । त्यसैले म सँगको बन्धक र अस्ति दिएको ४,००० जोडौ अनि नखामेको रकम म केही थपँुला , जग्गा मलाईनै दिए राम्रो हुन्थ्यो । के अब तैँ पनि नबुझ्ने केटाकेटी छैनस् त । बाबु छोरा सल्लाह गरौं अनि कुरा छिनौला हुन्न ? तपाई ले भन्ने कुरा भन्नु भयो जिमाल बा म यसमाथि विचार गरौला शंकरले भन्यो ।
+
+
+त्यो चन्दन जस्तै खेत हात लाउन सबै होडमा थिए । धर्म साहु, बजिर सिङ आदि । धर्म साहुलाई विश्वास थियो पक्का जग्गा त मेरो हुन्छ । साँध पनि मिलेको छ । तर जिमाल कान्छाको जग्गापनि साँध थियो । बलिया बलियाहरुको बिचमा त्यो जग्गा अमिलो देखेर ¥याल चुहे झै हुन्थ्यो । सबै शंकरलाई पगालेर जग्गा हात लाउने दाउमा थिए । तर धर्म साहुलाई डर थियो जिमाल कान्छाले सिध्याउँछकी भन्ने किनकी बन्धकीमा उसलै कमोद गर्दै आएको थियो । उनीहरु बिचमा धनको होड थियो । एक आपसमा आफ्नो शक्ति देखाउनु थियो । त्यो सामाजिक रबाफ को विषय पनि थियो । जतिसुकै मुल्य चुकाउन परेपनि उनीहरु त्यसमा दाह्रा घस्थे । 
+
+	बाबुको काज क्रिया सक्ने वित्तिक्कै साहुहरुले शंकरलाई प्रहरीले अपराधीलाई घेर्दा झै घेर्न थाले । त्यो जग्गा त अब गन्हाएको मासुमा झिँगा भुन्भुनाए झै, स्याल गिद्ध रमाए झै बन्न थाल्यो । शंकर ऋणले चुर्लुम्म डुब्यो । जिमाल कान्छो र धर्म साहुको कर्कशा कति सहने भनेर उसले जिमाल कान्छालाई जग्गा राजिनामा गरिदियो । जग्गाबाट प्राप्त थप रकम रु १०,००० बाबुको काजक्रिया र आफन्तको तिरोतारो ले सकियो । एक दुई साहुको मुख टाल्न भने सकेन । 
+
+	जग्गा बेचेको खबर सुन्ने बित्तिक्कै धर्म साहुँ उकालो लागे । शंकर घरमा खाना खादै थियो । बाहिरबाट चर्को स्वर सुनियो । ए बजियाका सन्तान कता गइस् ? खाँदा खाँदैको गाँस छोडेर शंकर घर बाहिर निस्क्यो । बाहिर धर्म साँहु देखापरे । उनले शंकरलाई भने जिमाल कान्छालाई जग्गा दिइस् भन्ने सुन्छु नि त के हो ? शंकरले नम्र स्वरमा उत्तर दियो । "जग्गा त दिएकै हुँ साहु बा ! बुढाले गर्जदै भने बाजे बराजुको पालादेखी गाह्रो साह्रो टार्दै आउने चाहि मै । अहिले जिमाल कान्छौ जग्गा खाने ? लंका जित्ने हनुमान पगरी गुथ्ने ढेडु हैन ? लौ ! मेरो बाँकी सवै चुक्ता गर नत्र मैले जाने बुझेको गर्छु । तँलाई बाबु भन्दा बुझकी छ । हरेक काम गर्दा विचार पुराउने गर्छ भन्ठानेको थिए अब ................ । शंकर ले भन्यो " साहु बा, मैले त एक जनालाई त अबस्य जग्गा दिनुपर्छ । यसमा तपाईले दुख मान्नु पर्ने केही देख्दीन । " राता राता आँखा पार्दै धर्म साहु ले भने "बाह्र्र सत्ताइस कुरा म जान्दीन मेरो बाटो फुकाइदे बस पुग्छ" । शंकरले भन्यो त्यसो भए दुईचार दिन पख्नोस है साहु बा ! उसो भए ठिकै छ म दुईचार दिनपछि आउछु फरक नपरोस् है भन्दै धर्म साहु बाटो लागे । 
+</p>
+       <div class="page-number">Page 22</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-20">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-22">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-22" aria-label="Chapter 22">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र २२</p>
+       <h2>बाइसौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>प्रभातको विहानी सँगै च्यार्र चुर्र चराहरुको सुसेलीले एकान्त बासको जिवनरुपी सिरान गाउँलाई ब्युझाउँथ्यो । उसरी नै-याउँ किरीको आवाज सँगै सन्नाटा छाउँथ्यो । अनि सुनकोशीले आफ्नो आवाजलाई बढाउँदै बढाउँदै लैजान्थ्यो । एक्लो जिवनको धरातलमा शंकर कति उभियोस् ? उसलाई हुनुसम्म नरमाइलो लाग्थ्यो । जाउँ भने कहाँ जाउँ सारा सहश्र वन्धरुपी आर्थिक समस्याले उसलाई बाँधीरहेको थियो । एकैचोटी चुडालेर जान पनि कठिन थियो । गाउँको मायाँ अन्तरह्ृदयमा प्रवल भएर आउँथ्यो । प्रकृतिले पस्केर दिएका चाँप गुराँसका मगमग बासना समिरको वेग सँगै आँगनमा हुन्डरी माथ्र्यो । त्यही नै उसको स्वर्गपुरी थियो । इन्द्रपुरी थियो अनि मायापुरी थियो । "
+
+	मनको बाँध जति बाँधे पनि रहन्न । विरही भाकाहरुले मुटु छचल्कीन्छ । समस्या आफ्नो गित बन्छ । अन्तर हृदयमा लुकेको आत्मकथाले सारा मुटुलाई छुन्छ । अतितका सम्झनाले मन रुन्छ । गहभरी आँसु आउँछ । त्यसै टल्पलाउँदै आँखामा नै बिलाएर जान्छ । देुखेको मनले कहाँ शान्ति पाओस् एकान्तको रोदनमा नै विश्राम लिन्छ । 
+
+	शंकरले आफ्नो वस्तुभाउ सबै बेच्यो ऋणको भारी चुक्ता गर्‍यो । साथमा केही पैसा बच्यो । मनमा अनेक तरङगहरु छचल्कीरहे गाउँमा बसेर उन्नती हुने देखेन शहर पसे केही गर्न सकिन्छ की भन्ठान्यो । रात रोहिरेहेको थियो विहानीको मिर्मिरेमा सानो झोलामा कपडाहरु कोच्यो । उ अटल निश्चयमा पुगी सकेको थियो । चरा चुरुङ्गीहरु च्यार्र चुर्र कराउँदै थिए । पल्लो पट्टि चन्दे्र खङ खङ खोकिरहेको थियो । शंकरले ढोका ढप्क्यायो भोटे ताल्चा ठोक्यो अनि बाटो लाग्यो । बाटोमा चराहरुले गाली गरे । कोकलेहरुलो काँ काँ गरेर सोधे । बयर र ऐसेलुका काँडाहरुले उसलाई ताने किन मान्थ्यो ? निष्ठूरीको मन एकोहोरो लागि रह्यो दृढ निश्चयका साथ काडाँहरु पन्छाउँदै पन्छाउँदै । चुच्चे ढुङगाहरुले बाटो छेके गोडामा ठेस् लगाउँदै विस्तारै सुनकोशीको आवाज बढ्दै गयो । मृगहरुले बाटो छेके । गाउँको मुटुभरी माया बोकेर उ झरिरह्यो ।
+
+	शंकरले नेटो काट्यो तिन कुनेमा मोटर चढ्यो । बसको लामो यात्रा पछि राती एक बजे काठमाण्डौ ओल्र्यो एता उता हेर्‍यो टेम्पो, रिक्सा केही देखेन । आफ्नो थकीत शरीर लाई पूर्वतिर बढायो । कहाँ जाने कतै चन्द्रास्तको मलिन प्रकाश कतै बिजुलीको बत्तिको उज्यालो उसले निर्णय गर्‍यो अब पुरानो छिमेकी नरसिँह काठमाडौको बानेश्वरमा घर बनाइ बसेका थिए । उनको घरमा जानुपर्‍यो भनि उ हिड्यो । लोड सेटीङको कारण शहरको बत्ति झ्याप्प निभ्यो । शंकरले आँखाहरु च्यात्यो अनि पाइलाहरु बढायो । ताराहरुले सगर ज्वजल्यमान थियो तर पृथ्वी मस्त निन्द्रामा थियो पथिक गन्तव्य स्थलमा बढि रह्यो अनि नरसिँहको घर पुग्यो अनि गेट खोलेर भित्र पस्यो, राति हँुदो किन अर्काको निन्द्रा बिथोल्ने भनेर भ¥याङको सिंडीमा झोलाको सिरान लगाएर एक छिन पल्टयो । थकित शरीर एकै छिनमा भुसुक्क निदायो त्यति खेर रातको चार बजिसकेको थियो । पल्लो पट्टि सडकको छेउमा साने पसलमा भाजुमान मैन बत्तिको उज्यालोमा पिसेको मसला प्याक गर्दै थियो अन्यत्र पनि मैन बत्तिको उज्यालो थियो । गाउँको सम्झनाले उसको मानसपटलमा निरन्तर झस्काई रह्यो , मुस्किलले आँखाहरु लागेका थिए ।
+
+विहानीको चार बज्यो लोडसेटीङले बत्तिहरु निभेका थिए । मैनको पिलपिले बत्तिले कृष्ण पक्षको अन्धारलाई चिर्दै थियो । नरसिँहको घरमा एक केटीलाई घर धन्दाको निम्ति राखेका थिए । जुन सिरान गाउँबाट आएकी थिई । बिहान सवबरै उठेर चिया बनाई क.नरसिहँको कोठामा लगिदिनु पथ्र्यो । नत्र उसलाई ड्युटीमा जान ढिलो हुन्थ्यो । सदा झै त्यस केटी चार बजे उठी झ्यालका कापाबाट हेरी भाजुमानको पसल खुलेको थियो । हत्पत् उठेर आँखा मिच्दै तल मैन किन्न आउँदै थिई उसले एउटा जीवीत प्राणीमाथि टेक्न पुगी । मानव स्वरुप अन्धकारमा स्पष्ट देखियो । ऊ आत्तिएर चिच्याई घरमा होहल्ला चल्यो सबै जना जर्याकजुरुक उठेर आए आखीर उही पुरानो छिमेकी शंकर थियो ।
+</p>
+       <div class="page-number">Page 23</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-21">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-23">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-23" aria-label="Chapter 23">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र २३</p>
+       <h2>तेइसौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>
+	एक दुई दिनको घुमाई पछि शंकरले एउटा सानो पुतली सडकको होटलमा पेट पोल्ने बाटो गर्‍यो । खाने बस्ने दुई चार सय हात खर्च पाउथ्यो । त्यही पनि बाहिरी घुमघाम र चिया खर्चले सिद्धिन्थ्यो । आखिर खाली हात र रित्तो पकेट । दिन चर्या यसरी नै बितिरह्यो । कहिले काँही पुरानो छिमेकी नरसिँह कहाँ आउथ्यो । बाल्य सखा मैना सँग आँखा जुथिरहन्थ्यो । वर्ष दिनको शिवरात्रीको मेला आइपुग्यो । पशुपतिको जात्रामा मैनाले शंकर लाई देखि अनि भिडलाई काट्ेदै शंकर छेउ पुगी अनि एकान्तमा दुःख सुखका कुरा गर्न लागे एक अर्का प्रतिको भावना बिस्तारै प्रस्फुटित भयो । मनका भावना हरुको आदान प्रदानले दुवैलाई एक सुत्रमा बाध्यो । दुवैले एक साथ जिवन ब्यतित गर्ने निश्चय गरी आ-आफ्नो बासस्थान तिर लागे । 
+
+मैना र शंकरले एक आपसमा भावनाका चित्रहरु कोर्न थाले । मुटुका धड्कनमा, हृदयका कुनामा दुवैले एक आपसमा सजिव चित्रहरु कुदिसकेका थिए । एउटा बिरुवा रोपेका थिए । त्यो बिरुवा झागिदै गयो, बढ्दै यो, अनि हुर्कदै गयो । "माया न त नाप्न सकिन्छ न देख्न सकिन्छ, र रोक्न सकिन्छ । यौवन सँगै बिस्तारै फक्रदै जान्छ । दुख सुखको साथी बन्छ । नशा नशामा तरल रगत सँगै बहन्छ । जिवीत प्राणीभित्र हृदयको कुनामा अमिट छाप भएर बसिदिन्छ अनि प्राणका अन्त्य सँगै बिलाएर मिट्टीमा मिल्छ । "
+
+हृदयको कुनामा सोचेको माया एकान्तमा साटेको माया दुई मुटुको बिच टुसाउँदै गयो । हुर्कदै गयो । ग्रिन हाउसको नर्सरीमा मात्र किन खादिएर बसोस् बिरुवा ? कृतिम वातावरणमा मात्र रमाउनु उसको विशेषता होइन । उ प्रकृति सँग जुधेर बाँच्न चाहन्छ । "त्यस्तै लुकेको माया हृदयका कुनमा मात्र कति अटाओस् ? साँचो प्रेमले साकार रुप लियो । मैना र शंकरले शहरको एक सानो छिडीको कोठामा डेरा गरे । यता नरसिंहको घरको चुलो चिसो भयो । नरसिंह मैनाको खोजिमा कति भौतारिए । कतै फेला पार्न सकेनन् घरमा साना केटाकेटी अनि श्रीमतीको भद्धा जिउ कसले घरको काम गर्ने बडो संकट एक दिन फोन आयो । मैया साहेब ठसठस कन्दै टेलिफोनको रिसीभर उठाउन पुगिन् बार्ता शुरु भयो उही मैना सँग ............. । ए ! मैना ! आज कहाँबाट बोलेकी हँ ? मैनाले भनि ठमेलबाट बोल्दैछु । सन्चैहुनुहुन्छ मैया साहेब ? बाबु अनि अंकललाई कस्तो छ ? मैया साहेब सबलाई आराम छ । तँ हराइस् भन्ने कुरामा कति दुख पाइयो । अनि गाउँको क्षेत्रिकालेले पो शंकर सँग बसेकी छ । भन्ने सुनेपछि पो बल्ल ढुक्क भयो । त्यसरी थाहै नदिई जानुहुन्छ ? अब जे हुनु भैगो ठिकै छ । अकंलले पनि एउटा राम्रो केटा सँग बिहे गरिदिने सोच बनाउनु भएको थियो । तिमीहरुको प्रेम रहेछ ठिकै भो । एक पटक दुबै यहाँ आउ है त हुन्छ भन्दै बार्तलाप बन्द भयो । 
+</p>
+       <div class="page-number">Page 24</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-22">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-24">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-24" aria-label="Chapter 24">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र २४</p>
+       <h2>चौबीसौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>समय बित्यो एक दिन मैना नरसिँहको गेटमा टुप्लुक्क देखा परि । देख्नासाथ कान्छो छोराले मैनालाई मैना भन्दै उसले अँगालो हाल्यो । अनि प्यार गरेर काखमा लिँदै मैना भित्र पसि । 
+
+मैया साहेब खुब खुशी भईन् अरु बेला गजक्क परेर बोल्ने मान्छे आज हँसिलो भएर बोल्दै थिइन् । अनि भनिन् के गरेर बसेका छौ अहिले ? मैना - सानो पेट पाल्ने बाटो छ । त्यसैले निर्वाह गरेका छौ । उसले झिनो स्वरमा उत्तर दिई अनि मैयाले भनिन् तँ गएपछि राम्रो सँग खाना पकाउने, भान्छाको टहल गर्ने मान्छे खोजेको कोही भेट्टिएन । सकि नसकि म आफैले गर्न थालेकी छु । मेरो शरीर आधि मासु भइसक्यो । यो टहलले ।  
+
+बेलुकी पख क. नरसिँह आइपुगे मैनालाई ठट्टा गर्दै भने हराएको मान्छे आइपुगेछ है ! मैनाले लाजले मुख छोपी । उसलाई के गरौ कसो गरौ भयो । उसले भनि नजिस्क्याउनुहोस् न अंकल । 
+
+के गरि बसेका छौ आजकल ? यसो पेट पाल्ने बाटो मात्र छ अंकल मैनाले भनि । पेट मात्र पाल्न किन यो घरमा आउ दुवैजना बस शंकर दिउँसो ड्यूटी गर्छ बेलुुका बिहान यो घरको टहल तिमीले गरिदेउ केही हुन्छ हुन्न ? कर्नेलले भने । त्यसो भए म हामी दुबै मिली सल्लाह गर्छौ अनि कसो हुन्छ मैनाले भनि र भोलिपल्ट बिहानै बिदा भएर हिडी सानो छोराले मैनालाई पछ्यायो । भोलिपर्सि आउँला है बाबु भन्दै उ बाटा लागी । 
+</p>
+       <div class="page-number">Page 25</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-23">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-25">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-25" aria-label="Chapter 25">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र २५</p>
+       <h2>पच्चीसौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>
+राममाया उसको लोग्ने सँगै महेन्द्र नगर गएकी थिई । रने बितेको पनि ! एक वर्ष छ महिना भयो त्यसै वर्ष तिहारताका उ आफ्नो कर्म भुमि फुलपिङ आई । धेरै समय भयो भाइलाई पनि भेटेको छैन । संयोगले तिहारपनि नजिकै आयो । उ सिरान गाउँ तर्फ आई आउँदा घरमा भोटे ताल्चा लगाएको थियो । गाउँमा एक दुई घर मात्र बाँकी रहेको । सारा बस्ति तलफाँटमा बसाई सरेको देख्दा उ छक्क परी । मानव जिवनमा आएको यो परिवर्तन, परिर्वन मात्र थिएन समयको गति विकाशको पाइला थियो । सलसल रातो माटो र कमेरोले लिपीने त्यो घर आज पिडी र गाह्रो वर्षाद्को पानीले लेउ र ढुसीका साथै घाँस उम्रेको थियो । हे भगवान ! मेरो भाई कहाँ गयो होला ? उ आश्चर्यमा परी । यत्रो टिकाको दिन भाईलाई भनेर ल्याएको माला र प्रसाद त्यसै खेर गयो । माला झिकेर दैलामाथि राखेको तस्वीरमा सिउरीदिई । मनमा माइती देशको माया प्रवल भएर आयो । अगाडि फर्केर हेरी बाल्यकालमा गाईवस्तु चराउने पाखाहरुको संझना आयो । आँखाबाट आँसु बर्सिए । गोडाहरु लर्वराए । अब कसरी फर्कु घर ? मनमा यी वेदनाहरु बोकेर राममाया अगाडि बढी बाटोमा चन्दे्र काका भेट भए । ए ! राममाया पो ! राममायाको आँखाबाट आँसुका धारा बर्सिए । अगाडि बङलड्ढ ढली चन्द्रे काकाले पाखुरामा समातेर उठाए अनि भने किन रोएकी ? नरोउ , नरोउ । तिम्रो बा आमा नभए हामी छौ । भाईले पनि भएको जेथोमेथो सबै बेच्यो र नेपालतिर लाग्यो के गर्नु साहुको मुखबुझो लाउनै पर्‍यो । गएदेखि आएको छैन एकपटक पनि राममायाले सोधी चन्दे्र अहँ धेरै नै भो उतै मैनासँग विहे भयो भन्ने सुन्छु । आपसमा कुरा गर्दै राममया र चन्द्रे चन्द्रको घरतर्फ लागे । राममयाले प्याच्च मुखबाट निकालि अब माईति आउने नातो टुट्यो । चन्द्रेले जबाफ दिँदै भन्यो । मैले अगिनै भनिन तेरो बा आमा नभएपनि हामि छौ भनेर । त्यतिमात्र काहाँ होर चेलिका लागि माईति देशको कुकुर प्यारो भन्छन । त्यसमा पनि हामि तेह्र दिने दाजुभाई दुईचार पुस्ता सकिएको मात्र हो । कहाँ बढि भएको छ र सम्झिए हामि पनि नजिक्कै मान्छे हौँ । राममयाको सुँकसुके आवाज र उसका मुखाकृतिमा हेर्दाहेर्दै चन्दे्रका आँखा पनि रसाए । टल्पल टल्पल गह भरिका आँसुलाई उसले आँखा भित्र पचायो विहानी पखको खाना चन्र्दे कहाँ खाएर राममाया घर फर्केन सुरमा लागि । चन्दे्र काकाले एक दिन बस्न कर गरे तैपनि उसको मन मानेन । उ विदा मागेर अघि बढी बाटोमा अनेक तरड्ढहरु आए । कोखाइ कोखाइ गरेर खाना खुवाएको आफ्नो भाई आज यति ठुलो भयो । माइतीको नाममा यति एउटा भाई पनि पर भयो । निमुखा छ । केही जान्दैन । कुनै चिसो छिडी कुरेर बसेको छ की । कतै भोकै त छैन ? आदि भट्भटयाउँदै र भाइप्रतिको चिन्तनमा डुब्दै बाटो काटेको राममायालाई पत्तो भएन । साँझपख घर पुगी अनी आफ्नै घरको लुते धन्दामा ब्यस्त भई । 
+
+</p>
+       <div class="page-number">Page 26</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-24">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-26">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-26" aria-label="Chapter 26">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र २६</p>
+       <h2>छब्बीसौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>
+शंकरले पुतली सडकको सानो होटलमा काम गथ्र्यो । साहुले घाटा लाग्यो भनेर होटल बन्द गर्‍यो कहाँ के गर्ने शंकरलाई चिन्ताले पिरोल्यो । दिन भर कामको खोजिमा गल्ली गल्ली भौतारियो । भने जस्तो काम कतै भेटिएन । उच्च शिक्षा पढ्ने धोको पनि थियो । आर्थिक समस्या तगारो बनेर बसिदियो । मैनाले मैयासाहेवलाई फोनमा कुरा गरेर आफ्नो समस्या दर्शाई । उनले आफ्नो घरमा आएर बस्ने सल्लाह दिइन् । दुबै कर्नेल नरसिँह थापाको घरमा आएर बसे । 
+
+पुस, माघको काठमाण्डौँको कठ्याङग्रीने जाडो सबेरै उठेर मैना कर्नेलको घरको काममा हाजीर हुन्थी कर्नेल साहेव नउठ्दै कोठामा चिया पुग्थ्यो । केटाकेटीलाई समयमा खाना खुवाएर स्कुल पु¥याउनु, घरको भाँडाकुडाँ सफा गर्नु, चार बजेपछि केटाकेटीलाई लिन जानु, यी सारा कामले मैनालई फुर्सद थिएन । एक दिन शंकरले देख्यो मैनाका दुबै हात छिया-छिया भएका थिए । जब ऊ छिंडिमा बसेर भाँडा माज्दै थिई । उसको सहनशिलता देखेर शंकरलाई दया लाग्यो । मनमनै खिन्न भयो । मनमनै सोच्यो मैले एउटा नारी प्रति ठूलो शोषण गरेछु । 
+
+त्यस दिन रविले पनि आँखा चिम्लिए, शशीले आफ्नो मूहारलाई पूर्णीमाको आगमन सँगै प्रसन्न मुद्रामा आफ्नो कान्तिलाई फिँजाए । मैना सदा झै भान्साको काम सकेर कत्तिन्खेर आउली भनेर शंकर पलड्ढमा पल्टीरह्यो । घडी हेर्‍यो बेलुकाको दश बजेछ । ताराहरु सगर भरी चम्किरहेका थिए । मनमा खुशी भए पो त्यो जुनेली रात रमाईलो हुन्थ्यो । उसको जीऊ अस्पटायो । मैना अझ आइन हा ............... । यो जीन्दगी म उसलाई दासी बनाएर बाँची रहेछु । ब्यर्थ मेरो जीन्दगी मनका यी गन्थनहरु नसकीदै मैना आइपुगी खुईया गर्दै पलङमा पल्टीई । शंकरले सोध्यो किन यतिन्जेल सम्म .............. ? विहान देखिका भाँडा कँुडा सफा गर्दा र यो भारी ज्यूले मै हैरान छु । शंकरले दुःखी भएर भन्यो मैना यो अर्काको दास बनेर जीवीको गर्नभन्दा स्वतन्त्रता र स्वभाीमानको बचाई धेरै बेस । जाउ आफ्नै खोरीया फाँडौं, खोस्रौ अनि गुन्द्रुक र ढिडो खाउ हुन्न ? धेरै बेरको गन्थन मन्थन पछि मैनाले पनि सहमति जनाई ।
+
+केही दिनको बसाई पछि मैनाले छोरो जन्माई भर्खर की सुत्केरी मैनाले कर्नेलको घरको टहल गर्न सकिन मैया साहेव रीसाउन थालिन् । जब बच्चा तिन महिनाको भयो मैना र शंकरले घरबेटी सँग बिदा मागे मैया साहेवले भनिन् के गर्छौ गाउँ गएर ? यहि पेट पाल्नी बाटो भएको छ, नराम्रो के भएको छ र ? यही बस भोली कतै खोज्दा राम्रो काम पाइहालिन्छ । किन आत्तिनु पर्‍यो । शंकरले उत्तर दियो होइन मेम साहेव यस्तो कमाईले केही गर्न सकिने होइन हामीले बाच्नु नै रहेछ जहाँ गए पनि बाचिहालिन्छ नी भन्दै दुवैले विदा मागेर गाउँतिर हिडे । तीन कुनेमा बस रोकियो ५ बजे बसबाट ओर्ले पछि सारा गाउँलेहरु भेट भए अनि गाउँघरको सबै हाल खबर सोध्यो । मान्छेहरु सारा गाउँ छोडेर तल बसाई सरेको देख्दा दुबै छक्क परे । 
+
+पाइलाहरु अगाडी बढ्दै गए । हर्के काठको मुढो काँधमा लिएर घरतिर जादैथियो । शंकरले टाढै बाट बोलायो हर्के दाइ ........ । हर्केले फ्वात्त मुढो भँुईमा फालेर सिरको टोपिले पसिना पुछ्दै, फर्केर हेर्‍यो शंकर पो रहेछ । हर्केले भन्यो धेरै दिनपछि भेट भइस् शंकर । विहे गरिस् भन्ने सुनेको थिए । बच्चा पनि भईसकेछ । मैनाले लजाएर मुन्टो फर्काई । फेरी हर्केले सोध्यो । अब कहिले जान्छौ ? शंकरले भन्यो अब नजाउँ दाई । त्यसोभए कहाँ बस्छौ त गाउँको घर पनि भत्क्यो । गाउँमा कोही पनि बसेका छैनन फेरी कसरी बस्छौ एक्लै ? फेरी बर्खा लाग्यो । हर्केले भन्यो । शंकर गाउँमा सानो कटेरो बनाउँछु बस्छु । हर्के गाउँमा बस्ने भए मेरो धनसारमा बस माथि सुत्ने तल ढोका बनायो भैहाल्छ । मलाई केही दिनु पर्दैन । त्यही बारी कमाई गर केही आए देउ नआए ठिकै छ । शंकरले भन्यो हुन्छ दाई ठिकैछ । 
+</p>
+       <div class="page-number">Page 27</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-25">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-27">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-27" aria-label="Chapter 27">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र २७</p>
+       <h2>सत्ताइसौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>सिरान गाउँ आज सिरान गाउँ छैन कतै सिरु कतै तितेपातीले सारा बस्ती हरियाली छाएको छ । सिरानगाउँ सिरानगाउँ नभएर सिरुवारी भएको छ । मकै र घैया फल्ने विशाल पाटाहरु छातीभरी सेतै फुलेका सिरुका भुत्ला लिएर रुन्चे अनुहारमा बसेको छन् । आज दुई युगल जोडीमा आगमनले ति विशाल पाटाहरु आफ्ना छातीमा अन्नका दाना फलाउने आंशामा रहेछन् । चाँपका मगमग बास्ना कसैको आँगनमा डुल्न नपाउँदा त्यसै चाउरिएर झर्दा रहेछन् । चराहरु मान्छेको आश्रय नपाएर बाज र वन्यजन्तुका भयले आत्तिएका रहेछन् । आज शंकरको आगमनलाई प्रकृतिका यी सारा चिजहरुले स्वागत गरे । चापँहरुले, गुराँसहरुले, बाँसहरुले, चराहरुले । स्वागत नगरुन पनि किन आफ्नो आत्मकथा र जिवनलिला जो वुद्धिमान मनुस्यले मात्र बुझद्छ भन्ने उनीहरुलाई थाहा छ ।जहाँ प्रकृति आफ्नो गुलाबी चेहेरा र रुप रंग हेर्ने मान्छे नपाउँदा त्यसै त्यसै रिसाएकी थिइन । वसन्तीको मगमग वासना र कोकिलको मधुर आवाज, सल्लेरीको सुसाइ प्रकृतिको यो स्वर्गद्धारी रुन्चे अनुहार, आलस्य र मान्छेको उदासिनता देख्दा बैराग्य छ । पर पारी पट्टि देउराली भन्ज्याङ आफ्नै मस्त धुनमा छ । सगरलाई छुँदा झै गरी भोटो, कछाड, गुन्यु चोलीमा उभिएको छ । टुकी, लाल्टीनको पिलपीले बत्तिमा झोपडीहरु उजेलीएका छन् । 
+हर्केलाई धन्यवाद दिदैँ ति युगल जोडी एकान्त निर्जन बस्तिमा पाइला टेक्न पुगे धेरै टाढा त कहाँ होर, एउटा चुच्चे डाँडा टोपीको आकारमा उभिएर रहीदिनाले गाउँ बँेसीको संकट आइपरेको छ । हिँडेर झर्दा त बिस मिनेट र उकालो चढ्दा आधा घण्टा न हो । हिँड्ने मान्छेलाई कति छ र ? 
+
+विहान बँेसीमा झर्‍यो, कमाई गर्‍यो, अनि बेलुकी झ्याउकिरीका आवाज र गोधुली सँगै साल घारीको वन भएर पात बजाउँदै, दुबै उकालो लाग्थे । यसरी नै उनीहरुको दिन चर्या बितीरह्यो पाखुरीको कमाइमा ।
+
+यस्तैमा त्यसवर्षको दशैँ पनि आइपुग्यो । आफु सँगैका साथीहरु देशबिदेसबाट खुशी साथ दशै मनाउन घर फर्कन्छन् कोही विदेशी सेनाबाट, कोही सरकारी सेनाबाट । तिनीहरुलाई देख्दा शंकरको मनमा खिन्नता र हिनताभास महसुस हुन्छ । अनि सम्पुर्ण शरीरले थकानको महसुस गर्छ । अनि मनभित्रको उकुसमुकुस खुइया लामो स्वास सँग बाहिर निस्कन्छ । 
+
+साँच्ची ! घर कसलाई प्यारो हुँदैन र ? घर र परिवारको उन्नतीको लागि मान्छे आज विभिन्न पेशा अनि विदेशका गल्ली गल्लीमा भौतारिदै छ । दशैँको आगमनले घर परिवारको स्नेह मनभरि उत्कट भएर आउँछ । बिस्तारै घरफिर्ने तयारीमा मान्छेहरु लाग्छन् । फेरी वर्षदिन भरीको दुख बिर्सेर मान्यजन सँगको आर्शिवाद लिएर आ-आफ्नो कर्मक्षेत्रमा जुट्नुपर्छ । कति छिटो आएछ, त्यो वर्षको दशै सँगैका साथीहरु छिरीङ देवेन्द्र, नरवहादुर, तिरमान, सोम सबै घर आए । छिरीङ र तिरमान सँगैका साथी, बाल्यकालमा सँगै वनपाखा डुलेर देउखर्कका एँेसेलु र काफल टिपेर खाएको संझना सबैको हृदयका कुनामा अमिट छ । धेरै दिनपछि साथीहरु संगको रमाइलो भेटघाटमा आफ्नो आत्मकथा उसले तिरमान र छिरिङलाई शंकरले कहन्छ । उनीहरु भारतीय सेनाबाट छुट्टिमा आएका छन् । बँेसीमा झरेर सन्तेको पसलमा त्यसरी भेट भएर कुराकानी गर्दा छिरीङले भन्यो हेर शंकर ! हिँड एकपटक इण्डिया आर्मीमा उभिउँ तँ लायकको पनि छस् । हामीलाई पनि भर्ति हौँला भन्ने आस थिएन । तैपनि भाग्यले साथ दियो त्यतिखेर हामीले तँलाई जाउँ भनेकै हो त !
+</p>
+       <div class="page-number">Page 28</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-26">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-28">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-28" aria-label="Chapter 28">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र २८</p>
+       <h2>अठ्ठाइसौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>शंकरले भन्यो, हो त्यतिखेर मेरो एस.एल.सी परिक्षा थियो । जे भएपनि पढियो । परिक्षा दिउँ भनेर लागेको हो । छिरिङले भन्यो ठिकैछ उमेर गएको छैन शारिरीक जिउडाल हाम्रो भन्दा राम्रो छ अक्टोवर दश तारिखमा गोरखपुरमा भर्ति खुल्दैछ जाउँ हुन्न ? त्यसो भए ठिकैछ म एक पटक मैनासँग सल्लाह गर्छु, सल्लाह मिल्यो भने जाउँला भन्दै शंकर त्यहा बाट ह्डियो । मैना काखको बच्चालाई घाममा राखेर तेल लगाउँदै थिई । शंकर टुप्लुक्क आइपुग्यो । अनि मैनालाई भन्यो । मैना ! तिमीलाई केही कुरा भनुँ ! मैना भन्नोस् न के छ ? शंकरले भन्यो छिरीड्ढले गोरखपुरमा भर्ती खुल्छ भनको छ, भाग्य भए भइहालिन्छ की के गरौँ ? 
+
+मैना अहिले हामीसँग एक कौडी छैन । फेरी काखको बच्चा, पाखुरीकोे कमाई म एक्लीले के गर्न सक्छु र ? हर्के साहुको पसलमा मैले भनेको छु छिरिड्ढले केही सहयोग गरौला भनेको छ । बीस दिन भित्रमा भर्ती भए ठीकै छ नभए फर्कौला, तिमीले त्यतिन्जेल सम्म दुःख गर्नुपर्छ । एउटा राम्रो पेशा नभए दुःख पाइदो रहेछ । शंकरले भन्यो । मैनाले प्रतिउत्तरमा आँसु खसाल्दै भनी म कसरी एक्लै बसँु यो निर्जन ठाउँमा ? 
+
+शंकर -
+पन्ध्र-बिस दिन दुःख गर त्यस पछि एउटा कुरा भै हाल्छ नी ।दशैको रमझम पनि सकियो । गाउँ घरका जागिरेहरु विस्तारै सेवामा हाजिर हुन थाले । छिरिङको विदा पनि सकिन लाग्यो । गाउँघरका सबै दाजु भाइले शंकरलाई भने जाने भए जा परेको घरको हेरचाह हामी हेरांैला । शंकरको घर छोड्ने दिन आउन लाग्यो मैनालाई धेरै संझायो । मैना विछोडको कुरा संझेर दुखी हुन्थी अनि शंकरले मैनालाई धेरै संझायो र भन्यो - भाग्यले साथ दियो भने घर्ति ठुले झै उतै बसौला नभए ठिकै छ आफ्नै खोरिया खनौला किन पिर गछ्र्यौ ? मैनाले गहभरी आँसु लिएर उभिरही । शंकरले आँखाको आँसु पुछ्दै भन्यो बाँच्नु मात्र पनि जिन्दगी होइन रहेछ मैना ! बाच्न त लुरे दमाई पनि बाँचेको छ। गल्लिको कुकुर पनि बाँचेको छ । शंकर गोरखपुर पुग्यो । केही समय होटलमा बस्यो अनि भर्ती खुल्यो । शंकर सबै कुरामा तन्दुरुस्ती देखियो मात्र एउटा दाँत किराले खाएको थियो मेडिकलमा तेही दाँत दुर्भाग्य बनि दियो । वल्ल तल्ल देशको स्वभीमानलाई कुल्चेर विदेशको नुन पानी खाँऊ र बहादुरी कमाऊ भन्ने इरादा नभए पनि बाध्यता नेपाली यूवाहरुमा छ । -विदेशी भर्तीमा जाने भर्खरका सोह्र वर्षे कलिला यूवकहरुको रगत आज विदेशका मरभूमीमा परेड खेलीरहेको छ । यो कुरा बुझेर पनि बुझ पचाउनु पर्ने भएको छ । शंकर जस्ता युवालाई यो विवशता हो । शंकर गाउँ फक्र्यो । असफलताले विष्मातका साथ उ बेलुकी पख घरमा पुग्यो । घरमा एउटा दात्री संस्थाले दिएको कोरली बाच्छी घर अगाडि बाँधेको रहेछ । त्यो देखेर एक आपसमा मानव र पशु तर्से । अनि गाई करायो बाँ ........... । शंकर छक्क पर्‍यो । मैना बत्ति लिएर हतपत गाई तिर बढ्न लागि शंकर आँगनमा देखा पर्‍यो खुईया सुस्केरा हाल्यो । मैनाले बत्तिको धुमिल प्रकाशमा चिट चिट पसीना आएको देखी मायाले पटुकीको सप्को झिकेर पसीना पुछिदिई । भित्र सानो बच्चा रोयो । दुवै भित्र पसे । बचेको थोरै खाना मैनाले पस्केर दिइ । भोकमा त्यो दिनको जस्तो भोजन उसलाई मैनाले पकाएको कहिल्यै लागेन । मैनाले सबै कुरा सोधी प्रतिउत्तरमा शंकर ले भन्यो हेर मैना ! एउटा दाँतको कारण जिन्दगीको सपना अधुरो रह्यो । मैनाले सहानुभुती देखाई र भनी भाग्यमा जे लेखेको छ त्यही हुन्छ । शंकरले भन्यो त्यसो होइन मैना ! भाग्य र कर्म मान्छेको हातमा हुन्छ । यी हातहरु कर्म क्षेत्रमा जुट्नु पर्छ सुन फल्छ । शंकर को आँखा निदाई रहेको सानो बच्चा माथि पर्‍यो उ आफ्नै सुखद स्वास र सपनाको संसारमा थियो , आफ्नो एउटा रगतको नाता र भोलिको एउटा कर्मठ नागरिक बनाउने दायीत्व बोध उसमा महशुस भयो ।
+
+</p>
+       <div class="page-number">Page 29</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-27">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-29">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-29" aria-label="Chapter 29">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र २९</p>
+       <h2>उनन्तीसौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>सधै अर्काको मजदुरी कति गर्ने ? पाएको ज्यालले विहान वबलुकाको छाक टार्न कठीन छ । सगैका साथीहरु कोहि विदेशी भर्तिमा, कोही अरब मुलुकमा घर छोडेर हिँडेका छन् कहिले सुखमय होला जिन्दगी भन्ने चिन्तनमा शंकर डुबेको छ । केही गर्दा पनि जिवनस्तर सुधे्रन । मैना एक मात्र सहृदयी जीवन साथी पाएको छ । उसले बुझेको छ । सारा देशको वस्तुस्थिति अनि बाध्यता छ । आज नेपाली जनशक्ति बिदेशीन । यहि इच्छा छ । शंकरलाई खाडी मुलुकमा गएर दुःख जेलो गर्ने । आज एउटा घर छैन उसको । पुरानो घर भत्केर जीर्ण छ । सारा छिमेकी आज बसाँई सरी सके । आफ्नो भने किलो गाड्ने ठाउँ छैन । उसमा हिम्मत छ । तै पनि आर्थिक बिपन्नता तगारो बनेर बसेको छ । आफ्ना योजनाहरु बिफल हुन्छन् । उसलाई पनि बिदेश गएर दुईचार पैसा कमाइएला की भन्ने मनको लहड जागृत हुन्छ तर कौडी छैन । गाउँघरको मानिसहरु भेट हुन्छन् र सोध्छन् के गर्दैछस् आजकल ? उसको जवाफ दिने ठाउँ छैन । हिउँद महिना लाग्यो गैराबारी रामजी बिदेश गएर आयो । शंकर सँग भेट भयो । रामजीले शंकरलाई सोध्यो के गर्दैछस् आजकल आफ्नै घर धन्दामा दिनचर्या बितेको छ शंकरले भन्यो । 
+
+शंकर-
+कहिले आइस् रामजी ? 
+राम जी-
+हिजोमात्र आएको ।
+शंकर-
+अब जान्छस् की जादैनस् ? 
+राम जी-
+अब एक महिना पछि जान्छु । कम्पनीले दुई /चार जना काम गर्ने मान्छे खोजेको छ । फ्रि भिसामा तँ जान्छस् त शंकर ? 
+शंकर-
+महिनाको आठ सय रियल हुन्छ । खाना र बस्ने ब्यवस्था कंपनीले गर्छ । 
+शंकर-
+म आर्थिक समस्याले जकडिएको मान्छे केही सहयोग साथीहरुबाट भयो भने जान्छु ।
+ठिकै छ, उता कमाएर मलाई पैसा तिरे भइहाल्छ । त्यसको चिन्ता नगरे हुन्छ । रामजीको सहमती प्रति खुशी हुँदै शंकर घर फर्कन्छ । मैना गाईलाई घाँस काट्दै थिई र माथि लामा गाउँ तिर जाने मानिसहरु तलमाथि उकालो ओराले गर्दै थिए । साँझपख झ्याउकिरीको किर्रकिर्र आवाजले कान खाइरहेको थियो । शंकरलाई आफ्नी प्रियतमाको अगाडि आफ्नो कुरा कतिखेर राखौं भैरहेको थियो । उसको मुखार विन्दुबाट उद्धगार शुरु भयो । मैना आज रामजीले एउटा खुशीको खबर सुनायो । विदेश जाने तिन वर्षको लागि हो यदी तिमी यो एकान्त बासमा समाधिका तपस्वी ऋषी झै बस्न सक्यौ भने हामी गरीबका सु-दिन फिर्ने थिए, भन तिम्रो के छ विचार ? मैनाका आँखा रसाए । उसले भनि "यो एकान्त बासमा म एक्लै कसरी बसौ ? हार गुहार कसैको छैन । यो एकान्त बास्थानमा म अकेली नारी कसरी बस्न सक्छु र ?" शंकरले भन्यो "धर्य गर मैना तिमी बुझ्क्की छ्यौ । गरिबीले गर्दा आजसम्म हामीले बस्ने बास सम्म बनाउन सकेका छैनौँ । फेरी यसरी बाधा पार्न थाल्यो भने तिम्रो सुदिन फेरी कहिल्यै फिर्ने छैनन् । प्लिज मलाई जानदेउ यो बेलामा पनि हामीले केही उन्नती गर्न सकेनौ भने हाम्रो भविष्य अन्धकार छ बेला यही हो केही गर्ने । भोलि बुढेस काल लागेपछि केही गर्न सकिदैन प्लिज तिमीले हासेर बिदा देउ मैना । मेरो खुशी भन्नु नै तिम्रो खुशी भन्नु नै मेरो खुशी तसर्थ जिवन एक संघर्ष हो त्यसैले तिमी संघर्ष गर्न सिक । धेरै दिनको बार्तलाप पछि मैनाले विदेश जाने कुरामा सहमति जनाई । 
+</p>
+       <div class="page-number">Page 30</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-28">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-30">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-30" aria-label="Chapter 30">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र ३०</p>
+       <h2>तीसौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>यहाँ तीसौं पत्रको सामग्री थप्नुहोस्।</p>
+       <div class="page-number">Page 31</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-29">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-31">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-31" aria-label="Chapter 31">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र ३१</p>
+       <h2>एकतीसौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>
+	जाने दिन नजिकँदै आयो । "प्रेम बन्धन यस्तो हुँदो रहेछ । जुन छुट्टिन कठिन ।" मैना र शंकर त्यो दिन अंकमाल गरेर रोए । भोलीको मिलनको प्रतिक्षा गर्दै छुट्टिए । 
+
+	डाँडाको चौतारीबाट सानो झोला बोकेर शंकर अगाडि बढ्यो । दृढ निश्चयमा पुगेको मन गन्तब्य तिर बढि रहयो । 
+शंकर विदेश लागेको पनि धेरै दिन पुगी सकेछ । प्लाष्टिक कप बन्ने कम्पनीमा उसको काम शुरु भयो । पलपल घरको यादले उसलाई सताइ रहन्छ । के गर्दै होला मेरी मैना ? बाबा भनेर बोलाउने त्यो अवोध शिशु उसको नजर वरिपरि घुमिरहन्छ । यो बाध्यता छ उसलाई विदेशीनु । खिन्नता मनमा जागृत हुन्छ । कम्पनीले भने जति तनखा दिएको छैन । भोली घर फर्केर साहुको डोको बुझाउन सकिएन भने बद्नाम हुन्छ । मान्छे मलेशियामा तनमन आफ्नै बारीकान्लामा । देशमा माओवादी जनयुद्धले संचार संपर्क सारा विच्छेद भएको चक्का जाम र नेपाल बन्दले जनजीवन अस्तव्यस्त बनेको छ । मैना गाईलाई घाँस पराल दिदै थिई हुलाकी ठूलेले शंकरको चिठ्ठी ल्याएर दियो । मैनालाई खुशीको सिमा रहेन । पाउनासाथ चिठ्ठी खोलेर हेरी । लेखिएको थियो । 
+
+प्यारी मैना तथा
+सानो छोरामा शुभ आर्शिवाद !
+
+ आरामका साथ जिवन बिताई रहेछु । मेरो लागि केही चिन्ता लिनु पर्दैन । मेरो समस्त माया तिमी र सानो छोरा प्रति भाग्यको खेल म आज तिमीबाट टाढा छु । धैर्य गर, जिवनमा मिलन बिछोड दुई किनारा हुन्छ । 
+
+	मैना तिमी र साना छोराको यादले मलाई सताईरहन्छ । हामी दुरीमा धेरै टाढा छौ तर प्रेमले नजिक छौ । यो माया र प्रेम अटुट नदि सरी बहिरन्छ । साँचो प्रेममा धैर्य हुन्छ, त्याग हुन्छ र तपस्या हुन्छ । तिम्रो तपस्यालाई मैले राम्रो सँग बुझेको छु । तिमी महान छ्यौ ।
+ 
+	मैना हामी यहाँ धेरै नेपालीहरु शोषित छौ । अनि यहाँ कोही बेरोजगार छैनन् । यहाँको ब्याख्या गर्दा तिमीलाई आश्चर्य लाग्न सक्छ । यहाँ कोही पनि पैदल हिड्दैनन् यहाँको विकाशलाई हेर्दा हामी एक सताब्दी पछाडी छौ । बाध्यता आज हामी रोजी रोटीको लागि विदेशीएका छौ । यो समस्या राज्यले जन्माएको छ । यसका लागि ठुलो आर्थिक क्रान्तीको खाँचो छ । 
+
+	मैना ! मैले मनि ट्रान्सफर बाट नेपाली बिस हजार पठाएको छु । आवश्यक खर्च गर्नु पत्रहरु पठाउँदै गर्नु अहिलेलाई कलम बन्द 
+
+ तिम्रो उही
+शंकर
+
+चिठ्ठी पत्रहरु आउँदै जादै गरे । जंगे कान्छाले बेँसीमा एक सि.डि.एम.ए.सञ्चार सेट ल्याएको थियो । त्यस मार्फत मैना र शंकरका कुरा कानीहरु अगाडि बढे । झण्डै एक वर्ष छ महिना बित्यो । शंकर अब घर र्फकने मनस्थीतीमा थियो । मैना त्यो दिन शंकरलाई फोन गर्ने सुरमा थिई उसको छेबैको रेडियोमा समाचार बाचन हुँदै थियो । उसलाई शारिरीक अस्वस्थताले गाजेको थियो । रेडियोले पुर्वको रिपीटर टावरलाई माओवदीले ध्वस्त गरेको संचार सपर्क विच्छेद भएको घोषणा गर्‍यो । त्यसपछि उसका गोडाहरु लागेनन् । छोरालाई पछाडी पट्टि पछ्यौरीले बाँधि बोकेर फोन गर्न जाने तयारीमा थिई । फेरी बोकेको भारी बिसाइ । गाईलाई घाँस काट्न अगाडि बढि उसलाई रिङगटा लाग्यो । थचक्क भुइमा बसि फेरि आएर ओछ्यानमा पल्टिई । शारिरीक दुर्वलताले उ अब ओछ्यानमा थलिई । सानो बच्चा रुन्छ, कराउँछ आमा ! आमा ! बु, बु । उ केही पाउँदैन उ बरण्डा चाहार्छ र आमाको काखमा आएर स्तन पान गर्न खोज्छ केही पाउँदैन । फेरी चित्कार छोड्छ । आमा ! माम् माम् पर देउरालीमा मान्छे देखिन्छन् । उ गुहार माग्छे जीउ गोडाहरु लर्वराएर हिडन सक्दिन । उसको स्वरलाई निष्ठुरी बतासले उडाएर लैजान्छ । हप्ता दिन बिती सक्यो शरिर सुकेर मुरली बन्यो । घरमा बाँधीएकी गाई बाँ गरेर कराउँछ । पानी सम्म दिन उ सक्दिँन । दिन प्रतिदिनका ब्यथाहरु एउटा डालीमा लेखेर राखेकी छे । यो विपद्को घडिमा कोही आइदिए हुन्थ्यो भनेर उ भगवनासँग प्रार्थना गर्छे । मैना यो चाहान्छे "आफु मरेर भएपनि पृथ्वीमा आफ्नो रगत रहिरहोस् ।" तर निष्ठुरी दैबले यो करा बुँझेन सुँक्क सुक्क आवाजमा बच्चा रोइरहेछ । उ मायाले अँगालो हाल्न खोज्छे आँखाबाट अब आसु बर्सन छोडे । तल कटेरोमा बाँधेकी गाईले अब बिदा लिइन् । श्याल र गिद्धहरु सिनो माथि छरिए । 
+</p>
+       <div class="page-number">Page 32</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-30">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-32">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+
+   <section class="page book-section hidden" id="chapter-32" aria-label="Chapter 32">
+     <article class="page-inner book-content">
+       <p class="chapter-kicker">पत्र ३२</p>
+       <h2>बत्तीसौं पत्र</h2>
+       <div class="chapter-ornament" aria-hidden="true"></div>
+       <p>
+	अन्तिम पत्रमा उसले शंकर सँग विदा लिई सानो बच्चा पनि अब चिर निद्रामा पुगिसकेको थियो । उसको प्राण पनि अब घाँटीमा अड्केको थियो । अन्त्यमा उसले मृत्युलाई घप्लक्क अँगालो हाली अनि आफ्नो एकमुठि प्राण वायुलाई हावामा छरिदिई । उसको शवमाथि पनि गिद्धहरुले रजाई गरे । त्यो पर छितीजमा शाहि भोजन गरेजस्तो देखीन्थ्यो । धेरै दिन बिते मैनाको न चिठ्ठी आउँछ न फोन नै । शंकर बडो चिन्तीत भयो । उ के गर्दै होली ? न कतै मरो मायालाई चटक्क माया त मारिन ? यतिका दिन बिते एक पत्र पनि हात परेन । उ गौण सोचाइमा डुब्छ । अनि भन्छ मेरी हो उ म बाट कहिल्यै टाढा हुन सक्दिन । जरुर पत्र आउँछ ।
+
+पत्र आज आउला छैन भोली आउला छैन महिना दिन बिती सक्यो पत्र अझै आएन । सायद घर फिर्ने बेला भयो भन्ने सोचेर नै होला मेरो प्राण प्यारीले पत्र नपठाएकी भन्दै शंकर मनमा उब्जेका ज्वारभाटा शान्त बनाउने कोशिश गर्छ । एकछिन पछि मनोवेग उर्लन्छ मनलाई भित्रभित्रै चित्त बुझाउँछ । अनि मनको ज्वारभाटा शान्त अनि मत्थर हुन्छ । बेला बितेका पनि पत्तै भएन । शंकर विदेशीएको पनि दुई वर्ष पुगेछ । घरको यादले सताउँछ । कति खेर घर फर्कन पाईएला र आफ्नी प्रियतमा सँग आफ्ना दुख, सुखका अनुभव सुनाउन पाईएला भन्ने उत्सुकता मनमा जाग्छ । कम्पनी बाट छुट्टी लिन्छ । आफ्नो बचेखुचेको रकम हात पार्छ र घर फर्कन नेपाली साथी सँग बिदा लिन्छ । शुक्ल पक्षको चाँदनी रात । शरद ऋतुको समय, खेतमा धानवाली लहलह झुलेको छ । पथिक गन्तब्य पथमा अगाडी बढिरहेछ । रातको करीव बाह्र बजेको छ । वातावरण सुनसान छ । पथिक तिनकुनेको बस्तीमा पुग्छ । लाटोकोसेरो र हौचीलको एकोहोरो स्वर सुनिन्छ । घर्ति ठुलेको घरमा ढकढक आवज गर्दै बाहिर बाट एक नवयुवक बोलाउँछ ठुल बा .............. । 
+
+
+	भित्रबाट घर्ति ठुले हतार गर्दै चुकुल खोलेर निस्कन्छ । हातमा झोला लिएर एक नवयुवक उभिइरहेको छ , चाँदनी रात, आफ्नो शिरलाई पाउतिर निहुराउँदै उ ढोग्न खोज्छ घर्ति ठुले उसको टाउको समाउँछ । अनि सोध्छ को हो हँ ? म शंकर हुँ बा ........ । ए बाबु आइपुगिस् तँ ? अँ बा आएँ भन्नोस् मैनाको के खबर छ ? घर्ति ठुलेले भन्यो खै धेरै दिन भो आएकी छैन । गाउँतिर पनि जाने मेसो छैन । आजभोली गाउँतिर घाँस काट्नु छैन एक महिना जति भो मैले त देखेको पनि छैन मैनालाई । शंकरले भन्यो लौत बा म अहिले घर तिर लाग्छु है । लौत नी बाबु गाउँ आएको छस् आउँदै गर है । बरु एक खिली चुरोट भए देउन बा ! शंकरले एक पाकेट चुरोट ठुलेलाई दिएर विदा भयो , शंकर उकालो लाग्यो । पुर्ण चन्द्रको उज्यालोले सारा बस्ती फाँटमा धान पहेँलपुर पाकेको छर्लङग देखिन्छ । हातमा सानो टर्चलाईट बोकेर उ अगाडि बढ्यो घर आइपुग्यो मैनालाई बोलायो । मैना......... । मैना ........ !
+
+	तर प्रतिउत्तरमा आएन । मस्त निन्द्रामा होली भन्दै ढोकालाई एक हातले धकेल्यो । ढोका फङलङ उघ्र्यो । टर्च बालेर अगाडि बढ्यो मधुर गन्धका साथ दुई मानव अस्तिपन्जर अगाडि देखा परे । उसको आङ जिरीङग भयो । मेरी बास्सै ! यो न सपना हो या विपना उ अन्योलमा पर्‍यो अझै नियालेर हेर्‍यो कंकालको हातमा चुरा अझै थियो , वस्त्र छरिएको थियो पछाडी फकर्यो डालीमा कलम र पत्रहरु अन्तिम विदाइका साथ देख्यो । यो के भयो ? झोला त्यही फ्याँकिदियो । मन मस्तिष्क हरायो । उ हुइकियो कही ठोक्किदै, पछारीदै कहिले हाँस्दै कहीले रुँदै कहिले चराहरुको लयमा कहीले गाडी गुडेको आवजमा आज कहिले उसको पाटीमा बास छत् कतै सडकको पेटीमा ।
+</p>
+       <div class="page-number">Page 33</div>
+       <div class="next-chapter-container">
+         <button class="prev-chapter-btn" type="button" data-target="chapter-31">← Previous</button>
+         <button class="next-chapter-btn" type="button" data-target="chapter-33">Next →</button>
+       </div>
+       <div class="page-jumper">
+         <form onsubmit="goToPage(event)">
+           <label for="page-input">Go to Page:</label>
+           <input type="number" id="page-input" min="1" max="34" />
+           <button type="submit">Go</button>
+         </form>
+       </div>
+     </article>
+   </section>
+       </div>
+     </article>
+   </section>
+
+  </main>
+
+  <script>
+    function goToPage(event) {
+      event.preventDefault();
+      const pageNum = parseInt(event.target.querySelector('#page-input').value);
+      if (pageNum >= 1 && pageNum <= 34) {
+        const targetId = pageNum === 1 ? 'introduction' : `chapter-${pageNum - 1}`;
+        const target = document.getElementById(targetId);
+        if (target) {
+          document.querySelectorAll('.book-section').forEach(section => {
+            section.classList.add('hidden');
+            section.classList.remove('active');
+          });
+          target.classList.remove('hidden');
+          target.classList.add('active');
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+  </script>
 </body>
 </html>
-
