@@ -1,5 +1,6 @@
 // Clean URL redirect
-if (window.location.pathname.endsWith('/index.html')) {
+const isHttp = window.location.protocol === 'http:' || window.location.protocol === 'https:';
+if (isHttp && window.location.pathname.endsWith('/index.html')) {
   const cleanPath = window.location.pathname.replace('/index.html', '/');
   window.location.replace(window.location.origin + cleanPath + window.location.search);
 }
